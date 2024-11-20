@@ -1,7 +1,8 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/6eRt7-90)
-<center><img src="{{ site.baseurl }}/tutheaderbl.png" alt="Img"></center>
+<p align="left">
+  <img src="https://github.com/EdDataScienceEES/tutorial-ellencrombie/blob/b4d472d0d16d8b3c4a36a63fc64683fd34168f8d/coding_club_logo.png?raw=true" alt="Coding Club Logo" width="300">
+</p>
 
-To add images, replace `tutheaderbl1.png` with the file name of any image you upload to your GitHub repository.
+___
 # Tutorial - by Ellen Crombie (s2314259@ed.ac.uk)
 ### Tutorial Aims
 
