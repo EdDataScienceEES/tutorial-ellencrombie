@@ -1,18 +1,18 @@
 <p align="left">
-  <img src="https://github.com/EdDataScienceEES/tutorial-ellencrombie/blob/b4d472d0d16d8b3c4a36a63fc64683fd34168f8d/coding_club_logo.png?raw=true" alt="Coding Club Logo" width="300">
+  <img src="https://github.com/EdDataScienceEES/tutorial-ellencrombie/blob/b4d472d0d16d8b3c4a36a63fc64683fd34168f8d/coding_club_logo.png?raw=true" alt="Coding Club Logo" width="250">
 </p>
 
 ___
-# Tutorial - by Ellen Crombie (s2314259@ed.ac.uk)
-### Tutorial Aims
+# Data Visualisation Continued: Interactive Visualisations - by Ellen Crombie (s2314259@ed.ac.uk)
+### Tutorial Sections
 
-#### <a href="#section1"> 1. The first section</a>
+#### <a href="#section1"> 1. Introduction to interactive plots using `plotly` </a>
 
-#### <a href="#section2"> 2. The second section</a>
+#### <a href="#section2"> 2. Interactive map visualisations using `leaflet` </a>
 
-#### <a href="#section3"> 3. The third section</a>
+#### <a href="#section3"> 3. Interactive data dashboards: combining `plotly` and `leaflet`</a>
 
-You can read this text, then delete it and replace it with your text about your tutorial: what are the aims, what code do you need to achieve them?
+### Introduction and Aims
 ---------------------------
 We are using `<a href="#section_number">text</a>` to create anchors within our text. For example, when you click on section one, the page will automatically go to where you have put `<a name="section_number"></a>`.
 
@@ -28,7 +28,7 @@ You can get all of the resources for this tutorial from <a href="https://github.
 
 <a name="section1"></a>
 
-## 1. The first section
+## 1. Introduction to interactive plots using `plotly`
 
 
 At the beginning of your tutorial you can ask people to open `RStudio`, create a new script by clicking on `File/ New File/ R Script` set the working directory and load some packages, for example `ggplot2` and `dplyr`. You can surround package names, functions, actions ("File/ New...") and small chunks of code with backticks, which defines them as inline code blocks and makes them stand out among the text, e.g. `ggplot2`.
@@ -48,7 +48,7 @@ library(dplyr)
 
 <a name="section2"></a>
 
-## 2. The second section
+## 2. Interactive map visualisations using `leaflet`
 
 You can add more text and code, e.g.
 
@@ -78,9 +78,9 @@ At this point it would be a good idea to include an image of what the plot is me
 
 <center> <img src="{{ site.baseurl }}/IMAGE_NAME.png" alt="Img" style="width: 800px;"/> </center>
 
-<a name="section1"></a>
+<a name="section3"></a>
 
-## 3. The third section
+## 3. Interactive data dashboards: combining `plotly` and `leaflet`
 
 More text, code and images.
 
