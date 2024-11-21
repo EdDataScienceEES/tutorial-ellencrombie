@@ -6,7 +6,7 @@ ___
 # Data Visualisation Continued: Interactive Visualisations 
 #### Created by Ellen Crombie - last updated November 2024
 ### Tutorial Sections
-- Click on a section to be taken directly to it.
+- Click on these sections to be taken directly to them!
 #### <a href="#section1"> 1. Introduction to interactive plots using `plotly` </a>
 
 #### <a href="#section2"> 2. Interactive map visualisations using `leaflet` </a>
@@ -18,32 +18,47 @@ ___
 This tutorial aims to continue building on skills already introduced on the topic of data visualisation by introducing an interactive element to both graphs and maps. Interactivity is an important aspect of data visualisation in the modern world as it is an important tool used by many websites, including the BBC, see a recent example [here](https://www.bbc.co.uk/news/articles/c0lp48ldgyeo), and other more data centred websites such as [Our World in Data](https://ourworldindata.org/).
 
 Interactivity allows the user to gain greater insight into what the plot or map is actually showing __WITHOUT__ cluttering the visualisation or reducing its readability.
-### Aims
+### Aims and Steps
 -----------------------------
 #### Introduction to interactive plots using `plotly`
-1. 
+1. Overview of plotly - installation and importing
+2. Basic plotting - plotly vs ggplotly
+3. Customisations of tooltips and hover effects
 #### Interactive map visualisations using `leaflet`
+4. Use of interactive maps
 #### Interactive data dashboards: combining `plotly` and `leaflet`
+
 
 > #### **Note** - All the files you need to complete this tutorial can be downloaded from [this Github repository](https://github.com/EdDataScienceEES/tutorial-ellencrombie.git). Clone and download the repo as a zip file, then unzip it and set the folder as your working directory by running the code underneath (replace with your actual folder path) or clicking `Session/ Set Working Directory/ Choose Directory` from the RStudio menu.
 
-### Downloading Data and Loading Libraries
 
-Make a new script file by clicking `File/ New File/ R Script`, give it a title and include relevant information like your name, date, etc.
-
-```r
-library(dplyr)
-library(ggplot2)
-# need to include loads more libraries here
-
-setwd("path_to_folder")
-LPI_data <- read.csv("LPIdata_CC.csv")
-
-```
+\
+\
 <a name="section1"></a>
 
 ## 1. Introduction to interactive plots using `plotly`
+#### Downloading Data and Loading Libraries
 
+Make a new script file by clicking `File/ New File/ R Script`, give it a title and include relevant information like your name, date, contact information.
+
+Within this example we will be using the 'palmerpenguins' dataset, this data was collected and made available by Dr. Kristen Gorman and the Palmer Station, Antarctica LTER (see below for data citation). This dataset can be called directly into R within libaries.
+
+> Note: use `install.packages("palmerpenguins")` to install this package. Then you can edit within the "" to install any other necessary packages that are used in this tutorial.
+
+```r
+## Interactive Plotting of Penguin Data
+## Data visualisation continued: A Coding Club Tutorial
+## YOUR NAME
+## DATE
+
+# Libraries ----
+library(palmerpenguins) 
+library(ggplot2)
+library(plotly)
+
+```
+
+<a name="section1"></a>
 
 
 <a name="section2"></a>
