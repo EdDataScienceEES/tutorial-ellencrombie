@@ -83,10 +83,9 @@ As you will be familiar with `ggplot` plots, lets start there!
 (penguin_plot <- ggplot(data = penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
   geom_point())
 ```
+![image](https://github.com/user-attachments/assets/229461be-f47c-4570-9159-0adb4ee27b7a)
 
-<p align="center">
-  <img src="https://github.com/EdDataScienceEES/tutorial-ellencrombie/blob/ad6b0d1d0b4cac2bc112b5cc3551b960e4f58b97/code_output/penguin_plot.png?raw=true" alt="Penguin Plot" width="700">
-</p>
+
 
 
 Now, lets convert this basic plot into an interactive one !
