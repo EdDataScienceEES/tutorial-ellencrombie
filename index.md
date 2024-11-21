@@ -38,6 +38,22 @@ Interactivity allows the user to gain greater insight into what the plot or map 
 <a name="section1"></a>
 
 ## 1. Introduction to Interactive Plots using `plotly`
+#### Overview
+Plotly helps help your data to life! you can zoom, pan, hover ... giving new depths to your charts.
+
+__Key Functions and What They Do__
+
+| **Function**         | **What It Does**                                                     |
+|----------------------|----------------------------------------------------------------------|
+| `plot_ly()`          | creates a new Plotly plot from scratch                        |
+| `ggplotly()`         | converts ggplots into interactive Plotly plots            |
+| `subplot()`          | combines multiple plots into one interactive dashboard              |
+| `add_trace()`        | add new data series to a plot (scatter, lines, bars etc.). |
+| `layout()`           | customise the layout (titles, axes, legends, etc.)                  |
+| `style()`            | change plot elements like colors and hover information          |
+| `highlight_key()`    | Highlight specific data points interactively      |
+| `saveWidget()`       | Save your plotly graph as an interactive HTML file |
+
 #### Downloading Data and Loading Libraries
 
 Make a new script file by clicking `File/ New File/ R Script`, give it a title and include relevant information like your name, date, contact information.
@@ -74,7 +90,8 @@ penguin_data <- penguins # assign the data as an object - allows easier explorat
 ```
 
 #### Basic Plotting
-Let's start simply, plotly has two options when creating interactive graphs. The first being to create it directly, using `plot_ly()`. And the second being to convert a static plot using `ggplot()`, like those you have learned how to make in [previous tutorials](https://ourcodingclub.github.io/tutorials/data-vis-2/).
+Let's start simply, plotly has two options when creating interactive graphs. The first being to create it directly, using `plot_ly()`. And the second being to convert a static plot from `ggplot2`(like those you have learned how to make in [previous tutorials](https://ourcodingclub.github.io/tutorials/data-vis-2/).
+) to an interactive one using `ggplotly()`. 
 
 As you will be familiar with `ggplot` plots, lets start there!
 ##### Interactive Scatter Plot
@@ -86,9 +103,23 @@ As you will be familiar with `ggplot` plots, lets start there!
 Now, lets convert this basic plot into an interactive one !
 ```r
 # Convert ggplot2 to plotly
-ggplotly(penguin_plot)
+(penguin_plotly <- ggplotly(penguin_plot))
 ```
 <iframe src="https://github.com/EdDataScienceEES/tutorial-ellencrombie/blob/61b635838bd1543f8680111ccdc5faac79bfe27e/code_output/penguin_plotly.html" width="800" height="600"></iframe>
+
+
+> ### Try hovering your cursor over points on the plot ... what information do you see?
+You should see information on penguin ...
+1. Bill length
+2. Bill depth
+3. Species
+   
+... that relates to the specifc point you are hovering over, and so changes as you move the cursor over the plot.
+
+The information displayed in these tooltips comes from the data supplied when creating the graph in the first place, however the content inside them can be altered to make the interactivity more useful and show information that wouldn't otherwise fit in the plot
+
+> Tooltips just refer to the little box that appears and provides extra infromation when you hover over data points in plotly graphs.
+
 
 <a name="section2"></a>
 
