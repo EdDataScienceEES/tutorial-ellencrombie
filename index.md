@@ -51,8 +51,8 @@ __Key Functions and What They Do__
 | `add_trace()`        | add new data series to a plot (scatter, lines, bars etc.). |
 | `layout()`           | customise the layout (titles, axes, legends, etc.)                  |
 | `style()`            | change plot elements like colors and hover information          |
-| `highlight_key()`    | Highlight specific data points interactively      |
-| `saveWidget()`       | Save your plotly graph as an interactive HTML file |
+| `highlight_key()`    | highlight specific data points interactively      |
+| `saveWidget()`       | save your plotly graph as an interactive HTML file so it can be uploaded to websites etc. |
 
 #### Downloading Data and Loading Libraries
 
