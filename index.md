@@ -91,7 +91,8 @@ Now, lets convert this basic plot into an interactive one !
 # Convert ggplot2 to plotly
 ggplotly(penguin_plot)
 ```
-<iframe src="https://github.com/EdDataScienceEES/tutorial-ellencrombie/blob/f5157a048cb14eb5e016b756117e55e019fabd01/code_output/penguin_plotly.html" width="800" height="600"></iframe>
+<iframe src="https://github.com/EdDataScienceEES/tutorial-ellencrombie/blob/8e3e3632f6737054701bcc75ac54c3ae27aa5cb2/code_output/penguin_plotly.html" width="800" height="600"></iframe>
+
 
 <a name="section2"></a>
 
