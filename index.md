@@ -83,6 +83,10 @@ As you will be familiar with `ggplot` plots, lets start there!
 (penguin_plot <- ggplot(data = penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
   geom_point())
 ```
+<div align="center">
+  <img src="code_output/penguin_plot.png" alt="Penguin Plot" width="700">
+</div>
+
 Now, lets convert this basic plot into an interactive one !
 ```r
 # Convert ggplot2 to plotly
@@ -94,28 +98,22 @@ ggplotly(penguin_plot)
 
 ## 2. Interactive map visualisations using `leaflet`
 
-You can add more text and code, e.g.
+
 
 ```r
-# Create fake data
-x_dat <- rnorm(n = 100, mean = 5, sd = 2)  # x data
-y_dat <- rnorm(n = 100, mean = 10, sd = 0.2)  # y data
-xy <- data.frame(x_dat, y_dat)  # combine into data frame
+
+
 ```
 
-Here you can add some more text if you wish.
+
 
 ```r
-xy_fil <- xy %>%  # Create object with the contents of `xy`
-	filter(x_dat < 7.5)  # Keep rows where `x_dat` is less than 7.5
+
 ```
 
-And finally, plot the data:
 
 ```r
-ggplot(data = xy_fil, aes(x = x_dat, y = y_dat)) +  # Select the data to use
-	geom_point() +  # Draw scatter points
-	geom_smooth(method = "loess")  # Draw a loess curve
+
 ```
 
 At this point it would be a good idea to include an image of what the plot is meant to look like so students can check they've done it right. Replace `IMAGE_NAME.png` with your own image file:
