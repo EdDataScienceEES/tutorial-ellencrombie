@@ -7,6 +7,7 @@ ___
 #### Created by Ellen Crombie - last updated November 2024
 ### Tutorial Sections
 - Click on these sections to be taken directly to them!
+  
 #### <a href="#section1"> 1. Introduction to interactive plots using `plotly` </a>
 
 #### <a href="#section2"> 2. Interactive map visualisations using `leaflet` </a>
@@ -36,12 +37,24 @@ Interactivity allows the user to gain greater insight into what the plot or map 
 \
 <a name="section1"></a>
 
-## 1. Introduction to interactive plots using `plotly`
+## 1. Introduction to Interactive Plots using `plotly`
 #### Downloading Data and Loading Libraries
 
 Make a new script file by clicking `File/ New File/ R Script`, give it a title and include relevant information like your name, date, contact information.
 
-Within this example we will be using the 'palmerpenguins' dataset, this data was collected and made available by Dr. Kristen Gorman and the Palmer Station, Antarctica LTER (see below for data citation). This dataset can be called directly into R within libaries.
+Within this example we will be using the 'palmerpenguins' dataset, this data was collected and made available by Dr. Kristen Gorman and the Palmer Station, Antarctica LTER.
+\
+\
+__Meet the penguins!__
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/da3e6138-44e7-49f2-b0f8-c1421e0bbe72" alt="Description of image" width="300">
+	Artwork by @allison_horst.
+</p>
+
+Data Citation:
+Gorman KB, Williams TD, Fraser WR (2014). Ecological sexual dimorphism and environmental variability within a community of Antarctic penguins (genus Pygoscelis). PLoS ONE 9(3):e90081. https://doi.org/10.1371/journal.pone.0090081
+
+This dataset can be called directly into R within libaries.
 
 > Note: use `install.packages("palmerpenguins")` to install this package. Then you can edit within the "" to install any other necessary packages that are used in this tutorial.
 
@@ -55,11 +68,26 @@ Within this example we will be using the 'palmerpenguins' dataset, this data was
 library(palmerpenguins) 
 library(ggplot2)
 library(plotly)
-
+# Loading data ----
+penguin_data <- penguins # assign the data as an object - allows easier exploration as 
+ # you can open the data table from your environment
 ```
 
-<a name="section1"></a>
+#### Basic Plotting
+Let's start simply, plotly has two options when creating interactive graphs. The first being to create it directly, using `plot_ly()`. And the second being to convert a static plot using `ggplot()`, like those you have learned how to make in [previous tutorials](https://ourcodingclub.github.io/tutorials/data-vis-2/).
 
+As you will be familiar with `ggplot` plots, lets start there!
+##### Interactive Scatter Plot
+```r
+# Create a ggplot2 scatterplot
+(penguin_plot <- ggplot(data = penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
+  geom_point())
+```
+Now, lets convert this basic plot into an interactive one !
+```r
+# Convert ggplot2 to plotly
+ggplotly(penguin_plot)
+```
 
 <a name="section2"></a>
 
