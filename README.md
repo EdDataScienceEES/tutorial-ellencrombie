@@ -1,30 +1,31 @@
 <p align="left">
-  <img src="https://github.com/EdDataScienceEES/tutorial-ellencrombie/blob/b4d472d0d16d8b3c4a36a63fc64683fd34168f8d/coding_club_logo.png?raw=true" alt="Coding Club Logo" width="250">
+  <img src="https://github.com/EdDataScienceEES/tutorial-ellencrombie/blob/b4d472d0d16d8b3c4a36a63fc64683fd34168f8d/coding_club_logo.png?raw=true" alt="Coding Club Logo" width="200">
 </p>
 
 ___
-# Data Visualisation Continued: Interactive Visualisations - by Ellen Crombie (s2314259@ed.ac.uk)
+# Data Visualisation Continued: Interactive Visualisations 
+#### Created by Ellen Crombie - last updated November 2024
 ### Tutorial Sections
-
+- Click on a section to be taken directly to it.
 #### <a href="#section1"> 1. Introduction to interactive plots using `plotly` </a>
 
 #### <a href="#section2"> 2. Interactive map visualisations using `leaflet` </a>
 
 #### <a href="#section3"> 3. Interactive data dashboards: combining `plotly` and `leaflet`</a>
 
-### Introduction and Aims
+### Introduction
 ---------------------------
-We are using `<a href="#section_number">text</a>` to create anchors within our text. For example, when you click on section one, the page will automatically go to where you have put `<a name="section_number"></a>`.
+This tutorial aims to continue building on skills already introduced on the topic of data visualisation by introducing an interactive element to both graphs and maps. Interactivity is an important aspect of data visualisation in the modern world as it is an important tool used by many websites, including the BBC, see a recent example [here](https://www.bbc.co.uk/news/articles/c0lp48ldgyeo), and other more data centred websites such as [Our World in Data](https://ourworldindata.org/).
 
-To create subheadings, you can use `#`, e.g. `# Subheading 1` creates a subheading with a large font size. The more hashtags you add, the smaller the text becomes. If you want to make text bold, you can surround it with `__text__`, which creates __text__. For italics, use only one understore around the text, e.g. `_text_`, _text_.
+Interactivity allows the user to gain greater insight into what the plot or map is actually showing __WITHOUT__ cluttering the visualisation or reducing its readability.
+### Aims
+-----------------------------
+#### Introduction to interactive plots using `plotly`
+1. 
+#### Interactive map visualisations using `leaflet`
+#### Interactive data dashboards: combining `plotly` and `leaflet`
 
-# Subheading 1
-## Subheading 2
-### Subheading 3
-
-This is some introductory text for your tutorial. Explain the skills that will be learned and why they are important. Set the tutorial in context.
-
-You can get all of the resources for this tutorial from <a href="https://github.com/ourcodingclub/CC-EAB-tut-ideas" target="_blank">this GitHub repository</a>. Clone and download the repo as a zip file, then unzip it.
+> ## **Note** - All the files you need to complete this tutorial can be downloaded from [this Github repository](https://github.com/EdDataScienceEES/tutorial-ellencrombie.git). Clone and download the repo as a zip file, then unzip it.
 
 <a name="section1"></a>
 
@@ -99,6 +100,10 @@ Everything below this is footer material - text and links that appears at the en
 <hr>
 <hr>
 
+#### Related Tutorials
+- [Data Visualisation: Part 1](https://ourcodingclub.github.io/tutorials/datavis/)
+- [Data Visualisation: Part 2](https://ourcodingclub.github.io/tutorials/data-vis-2/)
+
 #### Check out our <a href="https://ourcodingclub.github.io/links/" target="_blank">Useful links</a> page where you can find loads of guides and cheatsheets.
 
 #### If you have any questions about completing this tutorial, please contact us on ourcodingclub@gmail.com
@@ -112,20 +117,3 @@ Everything below this is footer material - text and links that appears at the en
 		</h3>
 	</li>
 </ul>
-
-### &nbsp;&nbsp;Subscribe to our mailing list:
-<div class="container">
-	<div class="block">
-        <!-- subscribe form start -->
-		<div class="form-group">
-			<form action="https://getsimpleform.com/messages?form_api_token=de1ba2f2f947822946fb6e835437ec78" method="post">
-			<div class="form-group">
-				<input type='text' class="form-control" name='Email' placeholder="Email" required/>
-			</div>
-			<div>
-                        	<button class="btn btn-default" type='submit'>Subscribe</button>
-                    	</div>
-                	</form>
-		</div>
-	</div>
-</div>
