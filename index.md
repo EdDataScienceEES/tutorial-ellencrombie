@@ -83,8 +83,6 @@ As you will be familiar with `ggplot` plots, lets start there!
 (penguin_plot <- ggplot(data = penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
   geom_point())
 ```
-![image](https://github.com/user-attachments/assets/229461be-f47c-4570-9159-0adb4ee27b7a)
-
 
 
 
