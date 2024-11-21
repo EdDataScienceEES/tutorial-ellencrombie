@@ -83,18 +83,13 @@ As you will be familiar with `ggplot` plots, lets start there!
 (penguin_plot <- ggplot(data = penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
   geom_point())
 ```
-
-
-
 Now, lets convert this basic plot into an interactive one !
 ```r
 # Convert ggplot2 to plotly
 ggplotly(penguin_plot)
 ```
-<iframe src="https://raw.githubusercontent.com/EdDataScienceEES/tutorial-ellencrombie/386eb0837373779af03e129811831a6452d90bdb/code_output/penguin_plotly.html" width="800" height="600"></iframe>
 
-
-
+<iframe src="https://github.com/EdDataScienceEES/tutorial-ellencrombie/blob/f5157a048cb14eb5e016b756117e55e019fabd01/code_output/penguin_plotly.html" width="800" height="600"></iframe>
 <a name="section2"></a>
 
 ## 2. Interactive map visualisations using `leaflet`
