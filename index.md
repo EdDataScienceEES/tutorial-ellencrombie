@@ -84,6 +84,11 @@ As you will be familiar with `ggplot` plots, lets start there!
   geom_point())
 ```
 
+<p align="center">
+  <img src="https://github.com/EdDataScienceEES/tutorial-ellencrombie/blob/ad6b0d1d0b4cac2bc112b5cc3551b960e4f58b97/code_output/penguin_plot.png?raw=true" alt="Penguin Plot" width="700">
+</p>
+
+
 Now, lets convert this basic plot into an interactive one !
 ```r
 # Convert ggplot2 to plotly
