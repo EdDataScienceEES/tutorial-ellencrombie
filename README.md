@@ -25,27 +25,26 @@ Interactivity allows the user to gain greater insight into what the plot or map 
 #### Interactive map visualisations using `leaflet`
 #### Interactive data dashboards: combining `plotly` and `leaflet`
 
-> ## **Note** - All the files you need to complete this tutorial can be downloaded from [this Github repository](https://github.com/EdDataScienceEES/tutorial-ellencrombie.git). Clone and download the repo as a zip file, then unzip it.
+> #### **Note** - All the files you need to complete this tutorial can be downloaded from [this Github repository](https://github.com/EdDataScienceEES/tutorial-ellencrombie.git). Clone and download the repo as a zip file, then unzip it and set the folder as your working directory by running the code underneath (replace with your actual folder path) or clicking `Session/ Set Working Directory/ Choose Directory` from the RStudio menu.
 
+### Downloading Data and Loading Libraries
+
+Make a new script file by clicking `File/ New File/ R Script`, give it a title and include relevant information like your name, date, etc.
+
+```r
+library(dplyr)
+library(ggplot2)
+# need to include loads more libraries here
+
+setwd("path_to_folder")
+LPI_data <- read.csv("LPIdata_CC.csv")
+
+```
 <a name="section1"></a>
 
 ## 1. Introduction to interactive plots using `plotly`
 
 
-At the beginning of your tutorial you can ask people to open `RStudio`, create a new script by clicking on `File/ New File/ R Script` set the working directory and load some packages, for example `ggplot2` and `dplyr`. You can surround package names, functions, actions ("File/ New...") and small chunks of code with backticks, which defines them as inline code blocks and makes them stand out among the text, e.g. `ggplot2`.
-
-When you have a larger chunk of code, you can paste the whole code in the `Markdown` document and add three backticks on the line before the code chunks starts and on the line after the code chunks ends. After the three backticks that go before your code chunk starts, you can specify in which language the code is written, in our case `R`.
-
-To find the backticks on your keyboard, look towards the top left corner on a Windows computer, perhaps just above `Tab` and before the number one key. On a Mac, look around the left `Shift` key. You can also just copy the backticks from below.
-
-```r
-# Set the working directory
-setwd("your_filepath")
-
-# Load packages
-library(ggplot2)
-library(dplyr)
-```
 
 <a name="section2"></a>
 
