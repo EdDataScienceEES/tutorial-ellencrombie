@@ -43,6 +43,8 @@ Plotly helps help your data to life! you can zoom, pan, hover ... giving new dep
 
 __Key Functions and What They Do__
 
+Here's a glossary of some key function within plotly, we will work through highlighting some in particular, but use this bank as a reference for making your own plotly graphs!
+
 | **Function**         | **What It Does**                                                     |
 |----------------------|----------------------------------------------------------------------|
 | `plot_ly()`          | creates a new Plotly plot from scratch                        |
@@ -95,6 +97,7 @@ Let's start simply, plotly has two options when creating interactive graphs. The
 
 As you will be familiar with `ggplot` plots, lets start there!
 ##### Interactive Scatter Plot
+Lets begin with a simple plot, the only extra information I'm adding is specifying `colour = species` so we can distinguish data points by penguin species
 ```r
 # Create a ggplot2 scatterplot
 (penguin_plot <- ggplot(data = penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
@@ -119,6 +122,22 @@ You should see information on penguin ...
 The information displayed in these tooltips comes from the data supplied when creating the graph in the first place, however the content inside them can be altered to make the interactivity more useful and show information that wouldn't otherwise fit in the plot
 
 > Tooltips just refer to the little box that appears and provides extra infromation when you hover over data points in plotly graphs.
+
+##### Plotly graph 
+
+Lets get familiar using the `plot_ly` function to create graphs directly, as we did a scatter plot before, lets try a box plot.
+
+The Palmers penguins dataset also includes data on flipper lengths so here we will plot that, again grouped by species.
+
+`plot_ly` doesnt use `aes()` like `ggplot2`does to map data to visual properties, instead, you directly pass variables from your dataset as arguments to the plotting function using the formula syntax (e.g., ~x, ~y).
+
+```r
+plot_ly(
+  data = penguins, 
+  x = ~species,          # group by species on the x-axis
+  y = ~flipper_length_mm, # flipper length on the y-axis
+  type = "box" # specify type of plot
+```
 
 
 <a name="section2"></a>
