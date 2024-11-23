@@ -138,6 +138,16 @@ plot_ly(
   y = ~flipper_length_mm, # flipper length on the y-axis
   type = "box" # specify type of plot
 ```
+Hovering your mouse over the box plot now will display the maximum, upper quartile, mean, lower quartile, and minimum values for flipper length. Our graph only has three box plots for the three penguin species however you can imagine this feature being particularly useful for more crowed box plots as it allows you to extract exact data points straight from the graph.
+
+You will see the tooltips look something like this
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/6f1ad310-b380-4de2-a3db-907b75e1156e" width="200">
+</p>
+
+Our plot can be still be improved, lets use some of the functions outlined in the glossary earlier. Instead of using `labs()` and multiple other functions like `ggplot2` does, plotly uses `layout()` for many actions, this encompasses editing of titles (main and axes), axis customisation, legend position
+
 
 
 <a name="section2"></a>
