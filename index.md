@@ -103,13 +103,16 @@ Lets begin with a simple plot, the only extra information I'm adding is specifyi
 (penguin_plot <- ggplot(data = penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
   geom_point())
 ```
+<iframe src="Figures/penguin_plot.html" width="800" height="600"></iframe>
+
+## Interactive Plots of Penguin Data
+
 Now, lets convert this basic plot into an interactive one !
 ```r
 # Convert ggplot2 to plotly
 (penguin_plotly <- ggplotly(penguin_plot))
 ```
-<iframe src="https://github.com/EdDataScienceEES/tutorial-ellencrombie/blob/61b635838bd1543f8680111ccdc5faac79bfe27e/code_output/penguin_plotly.html" width="800" height="600"></iframe>
-
+<iframe src="Figures/penguin_plotly.html" width="800" height="600"></iframe>
 
 > ### Try hovering your cursor over points on the plot ... what information do you see?
 You should see information on penguin ...
@@ -144,10 +147,35 @@ For the the tooltips specifically, readability is improved by renaming the value
 Any information that's contained in the data table can be added, so in our case this includes other variables like flipper length or body mass.  
 
 ```r
+# improved interactive plot
+(penguin_plotly_2 <- plot_ly(
+  data = penguin_data,
+  x = ~bill_length_mm,
+  y = ~bill_depth_mm,
+  color = ~species,  # Different colors for species
+  text = ~paste(
+    "Species:", species, # this information specifies what should be inlcuded
+    "<br>Bill Length:", bill_length_mm, "mm", # in the tooltips
+    "<br>Bill Depth:", bill_depth_mm, "mm",
+    "<br>Island:", island,
+    "<br>Sex:", sex
+  ),
+  hoverinfo = "text",  # display the customised text in tooltips
+  type = "scatter",
+  mode = "markers"     # Scatterplot with points
+) %>%
+  layout(
+    title = "Interactive Scatter Plot of Penguin Bill Data",
+    xaxis = list(title = "Bill Length (mm)"),
+    yaxis = list(title = "Bill Depth (mm)")
+  ))
+
+# save the improved plot as a HTML file
+htmlwidgets::saveWidget(as_widget(penguin_plotly_2), "code_output/penguin_plotly_2.html")
 
 ```
 
-
+<iframe src="Figures/penguin_plotly_2.html" width="800" height="600"></iframe>
 
 ```r
 plot_ly(
