@@ -119,17 +119,35 @@ You should see information on penguin ...
    
 ... that relates to the specifc point you are hovering over, and so changes as you move the cursor over the plot.
 
-The information displayed in these tooltips comes from the data supplied when creating the graph in the first place, however the content inside them can be altered to make the interactivity more useful and show information that wouldn't otherwise fit in the plot
+The information displayed in these tooltips comes from the data supplied when creating the graph in the first place, however the content inside them can be altered to make the interactivity more useful and show information that wouldn't otherwise fit in the plot.
 
 > Tooltips just refer to the little box that appears and provides extra infromation when you hover over data points in plotly graphs.
 
+You should also notice that you can now zoom, pan and edit how you see see tooltips on this graph, for example you can now 'compare data on hover' this displays multiple tooltips at once. When this is enabled, all data points that share the same x or y coordinate (depending on the plot's layout) display their tooltips simultaneously. This comparison provides additional context by letting you see how multiple points relate to each other.
+
+`hovermode = "x unified"`: Displays tooltips for all points with the same x-coordinate.
+
+`hovermode = "y unified"`: Displays tooltips for all points with the same y-coordinate.
+
+These distinctions are made within `layout()` when you make plot_ly graphs directly, we will further explore this now ...
+
 ##### Plotly graph 
 
-Lets get familiar using the `plot_ly` function to create graphs directly, as we did a scatter plot before, lets try a box plot.
-
-The Palmers penguins dataset also includes data on flipper lengths so here we will plot that, again grouped by species.
+Let's get familiar using the `plot_ly` function to create graphs directly, creating plots directly with this function make it much easier to cutomise the content of the tooltips we just described. So here we will return to the same graph to compare how it can be created using `plot_ly`
 
 `plot_ly` doesnt use `aes()` like `ggplot2`does to map data to visual properties, instead, you directly pass variables from your dataset as arguments to the plotting function using the formula syntax (e.g., ~x, ~y).
+
+Look carefully at the comments on this code before you copy in into your script, as well as customising tooltips it also tidies up the graph, introducing the `layout()` to add custom graph and axes titles.
+
+For the the tooltips specifically, readability is improved by renaming the values incuded to remove any underscores, units (mm) have been added after the values, and the extra information of the `Island` the penguin originated from, and `Sex` has been added. 
+
+Any information that's contained in the data table can be added, so in our case this includes other variables like flipper length or body mass.  
+
+```r
+
+```
+
+
 
 ```r
 plot_ly(
@@ -146,7 +164,7 @@ You will see the tooltips look something like this
   <img src="https://github.com/user-attachments/assets/6f1ad310-b380-4de2-a3db-907b75e1156e" width="200">
 </p>
 
-Our plot can be still be improved, lets use some of the functions outlined in the glossary earlier. Instead of using `labs()` and multiple other functions like `ggplot2` does, plotly uses `layout()` for many actions, this encompasses editing of titles (main and axes), axis customisation, legend position
+Our plot can be still be improved, lets use some of the functions outlined in the glossary earlier. Instead of using `labs()`, `theme()` or multiple other functions like `ggplot2` does, plotly uses `layout()` for many actions, this encompasses editing of titles (main and axes), axis customisation, legend position
 
 
 
