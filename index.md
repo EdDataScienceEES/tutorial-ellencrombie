@@ -103,7 +103,7 @@ Lets begin with a simple plot, the only extra information I'm adding is specifyi
 (penguin_plot <- ggplot(data = penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
   geom_point())
 ```
-<iframe src="Figures/penguin_plot.png" width="800" height="600"></iframe>
+![Penguin Plot](Figures/penguin_plot.png)
 
 ## Interactive Plots of Penguin Data
 
