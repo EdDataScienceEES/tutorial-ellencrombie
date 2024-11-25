@@ -194,9 +194,11 @@ As an activity, edit these colours and fonts to get comfortable with the functio
       bordercolor = "black" # Border color of tooltip
     )))
 ```
+The topics we have covered 
+> the colours of text and background in tooltips can be of particluar importance when considering users with colour blindness. You want to ensure the plot is accessible to all viewers so remember to consider clarity.
 
-> the colours of text and background in tooltips can be of partiluar importance when considering users with colour blindness. You want to ensure the plot is accessible to all viewers so remember to consider clarity.
- 
+This intorduction to `plotly` has focused a on scatter plot but it spans a wide range of graphs, and the tools above can be applied in a similar way to plots such as  line graphs, histograms, box plots, pie charts etc.
+
 <a name="section2"></a>
 
 ## 2. Interactive map visualisations using `leaflet`
