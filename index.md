@@ -38,6 +38,24 @@ Interactivity allows the user to gain greater insight into what the plot or map 
 <a name="section1"></a>
 
 ## 1. Introduction to Interactive Plots using `plotly`
+#### Overview
+Plotly helps help your data to life! you can zoom, pan, hover ... giving new depths to your charts.
+
+__Key Functions and What They Do__
+
+Here's a glossary of some key function within plotly, we will work through highlighting some in particular, but use this bank as a reference for making your own plotly graphs!
+
+| **Function**         | **What It Does**                                                     |
+|----------------------|----------------------------------------------------------------------|
+| `plot_ly()`          | creates a new Plotly plot from scratch                        |
+| `ggplotly()`         | converts ggplots into interactive Plotly plots            |
+| `subplot()`          | combines multiple plots into one interactive dashboard              |
+| `add_trace()`        | add new data series to a plot (scatter, lines, bars etc.). |
+| `layout()`           | customise the layout (titles, axes, legends, etc.)                  |
+| `style()`            | change plot elements like colors and hover information          |
+| `highlight_key()`    | highlight specific data points interactively      |
+| `saveWidget()`       | save your plotly graph as an interactive HTML file so it can be uploaded to websites etc. |
+
 #### Downloading Data and Loading Libraries
 
 Make a new script file by clicking `File/ New File/ R Script`, give it a title and include relevant information like your name, date, contact information.
@@ -74,10 +92,12 @@ penguin_data <- penguins # assign the data as an object - allows easier explorat
 ```
 
 #### Basic Plotting
-Let's start simply, plotly has two options when creating interactive graphs. The first being to create it directly, using `plot_ly()`. And the second being to convert a static plot using `ggplot()`, like those you have learned how to make in [previous tutorials](https://ourcodingclub.github.io/tutorials/data-vis-2/).
+Let's start simply, plotly has two options when creating interactive graphs. The first being to create it directly, using `plot_ly()`. And the second being to convert a static plot from `ggplot2`(like those you have learned how to make in [previous tutorials](https://ourcodingclub.github.io/tutorials/data-vis-2/).
+) to an interactive one using `ggplotly()`. 
 
 As you will be familiar with `ggplot` plots, lets start there!
 ##### Interactive Scatter Plot
+Lets begin with a simple plot, the only extra information I'm adding is specifying `colour = species` so we can distinguish data points by penguin species
 ```r
 # Create a ggplot2 scatterplot
 (penguin_plot <- ggplot(data = penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
@@ -86,35 +106,88 @@ As you will be familiar with `ggplot` plots, lets start there!
 Now, lets convert this basic plot into an interactive one !
 ```r
 # Convert ggplot2 to plotly
-ggplotly(penguin_plot)
+(penguin_plotly <- ggplotly(penguin_plot))
 ```
+<iframe src="https://github.com/EdDataScienceEES/tutorial-ellencrombie/blob/61b635838bd1543f8680111ccdc5faac79bfe27e/code_output/penguin_plotly.html" width="800" height="600"></iframe>
+
+
+> ### Try hovering your cursor over points on the plot ... what information do you see?
+You should see information on penguin ...
+1. Bill length
+2. Bill depth
+3. Species
+   
+... that relates to the specifc point you are hovering over, and so changes as you move the cursor over the plot.
+
+The information displayed in these tooltips comes from the data supplied when creating the graph in the first place, however the content inside them can be altered to make the interactivity more useful and show information that wouldn't otherwise fit in the plot.
+
+> Tooltips just refer to the little box that appears and provides extra infromation when you hover over data points in plotly graphs.
+
+You should also notice that you can now zoom, pan and edit how you see see tooltips on this graph, for example you can now 'compare data on hover' this displays multiple tooltips at once. When this is enabled, all data points that share the same x or y coordinate (depending on the plot's layout) display their tooltips simultaneously. This comparison provides additional context by letting you see how multiple points relate to each other.
+
+`hovermode = "x unified"`: Displays tooltips for all points with the same x-coordinate.
+
+`hovermode = "y unified"`: Displays tooltips for all points with the same y-coordinate.
+
+These distinctions are made within `layout()` when you make plot_ly graphs directly, we will further explore this now ...
+
+##### Plotly graph 
+
+Let's get familiar using the `plot_ly` function to create graphs directly, creating plots directly with this function make it much easier to cutomise the content of the tooltips we just described. So here we will return to the same graph to compare how it can be created using `plot_ly`
+
+`plot_ly` doesnt use `aes()` like `ggplot2`does to map data to visual properties, instead, you directly pass variables from your dataset as arguments to the plotting function using the formula syntax (e.g., ~x, ~y).
+
+Look carefully at the comments on this code before you copy in into your script, as well as customising tooltips it also tidies up the graph, introducing the `layout()` to add custom graph and axes titles.
+
+For the the tooltips specifically, readability is improved by renaming the values incuded to remove any underscores, units (mm) have been added after the values, and the extra information of the `Island` the penguin originated from, and `Sex` has been added. 
+
+Any information that's contained in the data table can be added, so in our case this includes other variables like flipper length or body mass.  
+
+```r
+
+```
+
+
+
+```r
+plot_ly(
+  data = penguins, 
+  x = ~species,          # group by species on the x-axis
+  y = ~flipper_length_mm, # flipper length on the y-axis
+  type = "box" # specify type of plot
+```
+Hovering your mouse over the box plot now will display the maximum, upper quartile, mean, lower quartile, and minimum values for flipper length. Our graph only has three box plots for the three penguin species however you can imagine this feature being particularly useful for more crowed box plots as it allows you to extract exact data points straight from the graph.
+
+You will see the tooltips look something like this
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/6f1ad310-b380-4de2-a3db-907b75e1156e" width="200">
+</p>
+
+Our plot can be still be improved, lets use some of the functions outlined in the glossary earlier. Instead of using `labs()`, `theme()` or multiple other functions like `ggplot2` does, plotly uses `layout()` for many actions, this encompasses editing of titles (main and axes), axis customisation, legend position
+
+
 
 <a name="section2"></a>
 
 ## 2. Interactive map visualisations using `leaflet`
 
-You can add more text and code, e.g.
+
 
 ```r
-# Create fake data
-x_dat <- rnorm(n = 100, mean = 5, sd = 2)  # x data
-y_dat <- rnorm(n = 100, mean = 10, sd = 0.2)  # y data
-xy <- data.frame(x_dat, y_dat)  # combine into data frame
+
+
 ```
 
-Here you can add some more text if you wish.
+
 
 ```r
-xy_fil <- xy %>%  # Create object with the contents of `xy`
-	filter(x_dat < 7.5)  # Keep rows where `x_dat` is less than 7.5
+
 ```
 
-And finally, plot the data:
 
 ```r
-ggplot(data = xy_fil, aes(x = x_dat, y = y_dat)) +  # Select the data to use
-	geom_point() +  # Draw scatter points
-	geom_smooth(method = "loess")  # Draw a loess curve
+
 ```
 
 At this point it would be a good idea to include an image of what the plot is meant to look like so students can check they've done it right. Replace `IMAGE_NAME.png` with your own image file:
@@ -150,7 +223,6 @@ Everything below this is footer material - text and links that appears at the en
 
 #### If you have any questions about completing this tutorial, please contact us on ourcodingclub@gmail.com
 
-#### <a href="INSERT_SURVEY_LINK" target="_blank">We would love to hear your feedback on the tutorial, whether you did it in the classroom or online!</a>
 
 <ul class="social-icons">
 	<li>
