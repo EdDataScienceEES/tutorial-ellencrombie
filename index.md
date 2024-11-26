@@ -151,7 +151,7 @@ These distinctions are made within `layout()` when you make plot_ly graphs direc
 ---
 #### Check this code after attempting yourself for the best practice !
 #### Example code for Bar Chart and Box Plot:
-Remember, there are different ways to code this, so your code might look different but still produce a great (or even better!) plot. So don't worry about that.
+Remember, there are different addittions you can make here, so your code might not look exactly the same but still produce a similar (or even better!) plot. These examples just provide a baseline.
 
 ```r
 # bar Chart
@@ -323,9 +323,15 @@ Before we make any more edits to the map we need to understand what the above co
 - Type: `scattermapbox` allows this type of interactive map to be plotted
 
 > Different maps that can be defined include
-> 1. scatterboxmap - these display data points as markers on a Mapbox map and is commonly used for geospatial scatter plots
-> 2. choroplethmapbox - displays areas filled with colours based on data values, needs files that define region values to work
-> 3. densitymapbox - a heatmap styep map that displays density respresented with colours, it needs ...
+> 1. `scatterboxmap` - these display data points as markers on a Mapbox map and is commonly used for geospatial scatter plots
+> 2. `choroplethmapbox` - displays areas filled with colours based on data values, needs files that define region values to work
+> 3. `densitymapbox` - a heatmap style map that displays density respresented with colours, it needs coordinate inputs for points, groups into density regions
+
+- Mode: `markers` displays data as individuals points
+- Colour: gives each point a different colour based on penguin species
+- Tooltips: changes what's displayed when you hover over points (used in the same way it is for graphs!)
+
+Back to our map, what should it look like? 
 
 
 ```r
