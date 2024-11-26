@@ -150,6 +150,7 @@ These distinctions are made within `layout()` when you make plot_ly graphs direc
   <summary><b>Click to reveal the code and what the graphs could look like</b></summary>
 
 ### Code for Bar Chart
+
 ```r
 # bar Chart
 (bar_chart <- ggplot(data = penguins, aes(x = species, fill = species)) +
@@ -165,6 +166,7 @@ These distinctions are made within `layout()` when you make plot_ly graphs direc
 (bar_chart_interactive <- ggplotly(bar_chart))
 # save plot
 htmlwidgets::saveWidget(as_widget(bar_chart_interactive), "Figures/penguin_bar_chart.html")
+
 ```
 
 <div style="text-align: center;">
@@ -188,6 +190,7 @@ htmlwidgets::saveWidget(as_widget(bar_chart_interactive), "Figures/penguin_bar_c
 (box_plot_interactive <- ggplotly(box_plot))
 # save plot
 htmlwidgets::saveWidget(as_widget(box_plot_interactive), "Figures/penguin_box_plot.html")
+
 ```
 
 <div style="text-align: center;">
