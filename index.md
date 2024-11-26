@@ -106,8 +106,9 @@ Lets begin with a simple plot, the only extra information I'm adding is specifyi
 ```
 It should look like this:
 
+<div style="text-align: center;">
 <img src="Figures/penguin_plot.png" width="800" height="600" />
-
+</div>
 ## Interactive Plots of Penguin Data
 
 Now, lets convert this basic plot into an interactive one !
@@ -115,7 +116,9 @@ Now, lets convert this basic plot into an interactive one !
 # Convert ggplot2 to plotly
 (penguin_plotly <- ggplotly(penguin_plot))
 ```
+<div style="text-align: center;">
 <iframe src="Figures/penguin_plotly.html" width="800" height="600"></iframe>
+</div>
 
 > ### Try hovering your cursor over points on the plot ... what information do you see?
 You should see information on penguin ...
@@ -146,8 +149,9 @@ These distinctions are made within `layout()` when you make plot_ly graphs direc
 > 3. Check your results against the provided solutions below.
 
 ---
-
-#### Code for Bar Chart and Box Plot: check after attempting yourself for the best practice !
+#### Check this code after attempting yourself for the best practice !
+#### Example code for Bar Chart and Box Plot:
+Remember, there are different ways to code this, so your code might look different but still produce a great (or even better!) plot. So don't worry about that.
 
 ```r
 # bar Chart
@@ -164,7 +168,8 @@ These distinctions are made within `layout()` when you make plot_ly graphs direc
 (bar_chart_interactive <- ggplotly(bar_chart))
 # save plot
 htmlwidgets::saveWidget(as_widget(bar_chart_interactive), "Figures/penguin_bar_chart.html")
-
+```
+```r
 # Box Plot
 (box_plot <- ggplot(data = penguins, aes(x = species, y = flipper_length_mm, fill = species)) +
     geom_boxplot() +
