@@ -148,9 +148,10 @@ These distinctions are made within `layout()` when you make plot_ly graphs direc
 ---
 <details>
   <summary><b>Click to reveal what the code could look like</b></summary>
-
+	
 ### Code for Bar Chart
-<pre>
+
+
 ```r
 # bar Chart
 (bar_chart <- ggplot(data = penguins, aes(x = species, fill = species)) +
@@ -168,9 +169,9 @@ These distinctions are made within `layout()` when you make plot_ly graphs direc
 htmlwidgets::saveWidget(as_widget(bar_chart_interactive), "Figures/penguin_bar_chart.html")
 
 ```
-</pre>
+
 ### Code for Box Plot (Penguin Flipper Length Across Species)
- <pre>
+
 ```r
 # Box Plot
 (box_plot <- ggplot(data = penguins, aes(x = species, y = flipper_length_mm, fill = species)) +
@@ -188,8 +189,7 @@ htmlwidgets::saveWidget(as_widget(bar_chart_interactive), "Figures/penguin_bar_c
 htmlwidgets::saveWidget(as_widget(box_plot_interactive), "Figures/penguin_box_plot.html")
 
 ```
-	
-</pre>
+
 </details>
 
 <details>
@@ -198,6 +198,7 @@ htmlwidgets::saveWidget(as_widget(box_plot_interactive), "Figures/penguin_box_pl
 <div style="text-align: center;">
     <iframe src="Figures/penguin_bar_chart.html" width="600" height="400" style="border:none;"></iframe>
 </div>
+
  
 <div style="text-align: center;">
     <iframe src="Figures/penguin_box_plot.html" width="600" height="400" style="border:none;"></iframe>
