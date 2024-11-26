@@ -185,7 +185,7 @@ htmlwidgets::saveWidget(as_widget(box_plot_interactive), "Figures/penguin_box_pl
   <summary><b>Click to reveal what the graphs could look like</b></summary>
 
 <div style="text-align: center;">
-    <iframe src="Figures/penguin_bar_chart.html" width="800" height="400" style="border:none;"></iframe>
+    <iframe src="Figures/penguin_bar_chart.html" width="600" height="400" style="border:none;"></iframe>
 </div>
 
 \
