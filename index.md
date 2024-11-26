@@ -149,8 +149,7 @@ These distinctions are made within `layout()` when you make plot_ly graphs direc
 <details>
   <summary><b>Click to reveal what the code could look like</b></summary>
 	
-__Code for Bar Chart__
-
+Code for Bar Chart
 
 ```r
 # bar Chart
@@ -170,7 +169,7 @@ htmlwidgets::saveWidget(as_widget(bar_chart_interactive), "Figures/penguin_bar_c
 
 ```
 
-__Code for Box Plot (Penguin Flipper Length Across Species)__
+Code for Box Plot (Penguin Flipper Length Across Species)
 
 ```r
 # Box Plot
