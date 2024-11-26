@@ -167,6 +167,10 @@ These distinctions are made within `layout()` when you make plot_ly graphs direc
 htmlwidgets::saveWidget(as_widget(bar_chart_interactive), "Figures/penguin_bar_chart.html")
 ```
 
+<div style="text-align: center;">
+    <iframe src="Figures/penguin_bar_chart.html" width="600" height="400" style="border:none;"></iframe>
+</div>
+
 ### Code for Box Plot (Penguin Flipper Length Across Species)
  
 ```r
@@ -185,6 +189,11 @@ htmlwidgets::saveWidget(as_widget(bar_chart_interactive), "Figures/penguin_bar_c
 # save plot
 htmlwidgets::saveWidget(as_widget(box_plot_interactive), "Figures/penguin_box_plot.html")
 ```
+
+<div style="text-align: center;">
+    <iframe src="Figures/penguin_box_plot.html" width="600" height="400" style="border:none;"></iframe>
+</div>
+
 </details>
 
 ##### Plotly graph 
