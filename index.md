@@ -83,12 +83,13 @@ This dataset can be called directly into R within libaries.
 ## DATE
 
 # Libraries ----
-library(palmerpenguins) 
-library(ggplot2)
-library(plotly)
+library(palmerpenguins) # Load penguin dataset for analysis and visualisation.
+library(ggplot2) # For creating static data visualisations
+library(plotly) # # For interactive data visualistation
+
 # Loading data ----
-penguin_data <- penguins # assign the data as an object - allows easier exploration as 
- # you can open the data table from your environment
+# assign the data as an object - allows easier exploration, you can open the data table from your environment
+penguin_data <- na.omit(penguins) # remove na's for ease of plotting
 ```
 
 #### Basic Plotting
@@ -103,13 +104,18 @@ Lets begin with a simple plot, the only extra information I'm adding is specifyi
 (penguin_plot <- ggplot(data = penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
   geom_point())
 ```
+It should look like this:
+
+<img src="Figures/penguin_plot.png" width="800" height="600" />
+
+## Interactive Plots of Penguin Data
+
 Now, lets convert this basic plot into an interactive one !
 ```r
 # Convert ggplot2 to plotly
 (penguin_plotly <- ggplotly(penguin_plot))
 ```
-<iframe src="https://github.com/EdDataScienceEES/tutorial-ellencrombie/blob/61b635838bd1543f8680111ccdc5faac79bfe27e/code_output/penguin_plotly.html" width="800" height="600"></iframe>
-
+<iframe src="Figures/penguin_plotly.html" width="800" height="600"></iframe>
 
 > ### Try hovering your cursor over points on the plot ... what information do you see?
 You should see information on penguin ...
@@ -123,13 +129,63 @@ The information displayed in these tooltips comes from the data supplied when cr
 
 > Tooltips just refer to the little box that appears and provides extra infromation when you hover over data points in plotly graphs.
 
-You should also notice that you can now zoom, pan and edit how you see see tooltips on this graph, for example you can now 'compare data on hover' this displays multiple tooltips at once. When this is enabled, all data points that share the same x or y coordinate (depending on the plot's layout) display their tooltips simultaneously. This comparison provides additional context by letting you see how multiple points relate to each other.
+You should also notice that you can now zoom and pan within the plot, as well as edit how you see see tooltips on this graph, for example you can now 'compare data on hover' this displays multiple tooltips at once. When this is enabled, all data points that share the same x or y coordinate (depending on the plot's layout) display their tooltips simultaneously. This comparison provides additional context by letting you see how multiple points relate to each other.
 
 `hovermode = "x unified"`: Displays tooltips for all points with the same x-coordinate.
 
 `hovermode = "y unified"`: Displays tooltips for all points with the same y-coordinate.
 
-These distinctions are made within `layout()` when you make plot_ly graphs directly, we will further explore this now ...
+These distinctions are made within `layout()` when you make plot_ly graphs directly, we will further explore this in the next 'plotly graph' section...
+
+> ### Activity : Here you've seen how to make a scatter plot interactive, now try converting some different types of plots using `ggplotly()`.
+> 1. Bar Chart of Penguin Abundance (grouped by species)
+> 2. Box Plot displaying flipper length
+> #### Instructions
+> 1. Write code to create the plots using `ggplot2`.
+> 2. Convert the plots into interactive graphs using `ggplotly`.
+> 3. Check your results against the provided solutions below.
+
+---
+<details>
+  <summary><b>Click to reveal the code and what the graphs could look like</b></summary>
+
+### Code for Bar Chart
+```r
+# bar Chart
+(bar_chart <- ggplot(data = penguins, aes(x = species, fill = species)) +
+  geom_bar() +
+  labs(
+    title = "Bar Chart of Penguin Species Count",
+    x = "Species",
+    y = "Count"
+  ) +
+  theme_minimal())
+
+# convert to interactive plot
+(bar_chart_interactive <- ggplotly(bar_chart))
+# save plot
+htmlwidgets::saveWidget(as_widget(bar_chart_interactive), "Figures/penguin_bar_chart.html")
+```
+
+### Code for Box Plot (Penguin Flipper Length Across Species)
+ 
+```r
+# Box Plot
+(box_plot <- ggplot(data = penguins, aes(x = species, y = flipper_length_mm, fill = species)) +
+    geom_boxplot() +
+    labs(
+      title = "Box Plot of Flipper Length Across Penguin Species",
+      x = "Species",
+      y = "Flipper Length (mm)"
+    ) +
+    theme_minimal())
+
+# Convert to interactive plot
+(box_plot_interactive <- ggplotly(box_plot))
+# save plot
+htmlwidgets::saveWidget(as_widget(box_plot_interactive), "Figures/penguin_box_plot.html")
+```
+</details>
 
 ##### Plotly graph 
 
@@ -141,32 +197,59 @@ Look carefully at the comments on this code before you copy in into your script,
 
 For the the tooltips specifically, readability is improved by renaming the values incuded to remove any underscores, units (mm) have been added after the values, and the extra information of the `Island` the penguin originated from, and `Sex` has been added. 
 
-Any information that's contained in the data table can be added, so in our case this includes other variables like flipper length or body mass.  
+Any information that's contained in the data table can be added, so in our case this could include other variables like flipper length or body mass.  
 
 ```r
+# improved interactive plot
+(penguin_plotly_2 <- plot_ly(
+  data = penguin_data,
+  x = ~bill_length_mm,
+  y = ~bill_depth_mm,
+  color = ~species,  # different colors for species
+  text = ~paste(
+    "Species:", species, # this information specifies what should be inlcuded
+    "<br>Bill Length:", bill_length_mm, "mm", # in the tooltips
+    "<br>Bill Depth:", bill_depth_mm, "mm",
+    "<br>Island:", island,
+    "<br>Sex:", sex
+  ),
+  hoverinfo = "text",  # display the customised text in tooltips
+  type = "scatter",
+  mode = "markers"     # Scatterplot with points
+) %>%
+  layout( # used to add titles to plots and axes
+    title = "Interactive Scatter Plot of Penguin Bill Data",
+    xaxis = list(title = "Bill Length (mm)"),
+    yaxis = list(title = "Bill Depth (mm)")
+  ))
+
+# save the improved plot as a HTML file
+htmlwidgets::saveWidget(as_widget(penguin_plotly_2), "code_output/penguin_plotly_2.html")
 
 ```
 
+<iframe src="Figures/penguin_plotly_2.html" width="800" height="600"></iframe>
 
+That looks clearer now! The use of hover effects and tooltips on your own graphs is entirely determined by what you want to get across so think carefully about the purpose and audience of your plots when making edits to them. 
+
+In our glossary ealier `style()` was introduced, have a play around with this. It is used to edit the appearance of tooltips. Some example code is provided below, this would be added via a pipe `%>%` after our edits made to layout.
+
+As an activity, edit these colours and fonts to get comfortable with the function.
 
 ```r
-plot_ly(
-  data = penguins, 
-  x = ~species,          # group by species on the x-axis
-  y = ~flipper_length_mm, # flipper length on the y-axis
-  type = "box" # specify type of plot
+# add this on to previous code from the graph
+%>%
+  style(  # change the hover text appearance
+    hoverlabel = list(
+      bgcolor = "white",      # Background color of tooltip
+      font = list(size = 12, color = "black"),  # Font size and color
+      bordercolor = "black" # Border color of tooltip
+    )))
 ```
-Hovering your mouse over the box plot now will display the maximum, upper quartile, mean, lower quartile, and minimum values for flipper length. Our graph only has three box plots for the three penguin species however you can imagine this feature being particularly useful for more crowed box plots as it allows you to extract exact data points straight from the graph.
+The topics we have covered 
+> the colours of text and background in tooltips can be of particluar importance when considering users with colour blindness. You want to ensure the plot is accessible to all viewers so remember to consider clarity.
 
-You will see the tooltips look something like this
-
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/6f1ad310-b380-4de2-a3db-907b75e1156e" width="200">
-</p>
-
-Our plot can be still be improved, lets use some of the functions outlined in the glossary earlier. Instead of using `labs()`, `theme()` or multiple other functions like `ggplot2` does, plotly uses `layout()` for many actions, this encompasses editing of titles (main and axes), axis customisation, legend position
-
-
+This intorduction to `plotly` has focused a on scatter plot but it spans a wide range of graphs, and the tools above can be applied in a similar way to plots such as  line graphs, histograms, box plots, pie charts etc.
 
 <a name="section2"></a>
 
