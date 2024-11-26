@@ -83,12 +83,13 @@ This dataset can be called directly into R within libaries.
 ## DATE
 
 # Libraries ----
-library(palmerpenguins) 
-library(ggplot2)
-library(plotly)
+library(palmerpenguins) # Load penguin dataset for analysis and visualisation.
+library(ggplot2) # For creating static data visualisations
+library(plotly) # # For interactive data visualistation
+
 # Loading data ----
 # assign the data as an object - allows easier exploration, you can open the data table from your environment
-penguin_data <- na.omit(penguins)
+penguin_data <- na.omit(penguins) # remove na's for ease of plotting
 ```
 
 #### Basic Plotting
@@ -106,6 +107,7 @@ Lets begin with a simple plot, the only extra information I'm adding is specifyi
 It should look like this:
 
 <img src="Figures/penguin_plot.png" width="800" height="600" />
+
 ## Interactive Plots of Penguin Data
 
 Now, lets convert this basic plot into an interactive one !
@@ -133,7 +135,57 @@ You should also notice that you can now zoom and pan within the plot, as well as
 
 `hovermode = "y unified"`: Displays tooltips for all points with the same y-coordinate.
 
-These distinctions are made within `layout()` when you make plot_ly graphs directly, we will further explore this now ...
+These distinctions are made within `layout()` when you make plot_ly graphs directly, we will further explore this in the next 'plotly graph' section...
+
+> ### Activity : Here you've seen how to make a scatter plot interactive, now try converting some different types of plots using `ggplotly()`.
+> 1. Bar Chart of Penguin Abundance (grouped by species)
+> 2. Box Plot displaying flipper length
+> #### Instructions
+> 1. Write code to create the plots using `ggplot2`.
+> 2. Convert the plots into interactive graphs using `ggplotly`.
+> 3. Check your results against the provided solutions below.
+
+---
+<details>
+  <summary><b>Click to reveal the code and what the graphs could look like</b></summary>
+
+### Code for Bar Chart
+```r
+# bar Chart
+(bar_chart <- ggplot(data = penguins, aes(x = species, fill = species)) +
+  geom_bar() +
+  labs(
+    title = "Bar Chart of Penguin Species Count",
+    x = "Species",
+    y = "Count"
+  ) +
+  theme_minimal())
+
+# convert to interactive plot
+(bar_chart_interactive <- ggplotly(bar_chart))
+# save plot
+htmlwidgets::saveWidget(as_widget(bar_chart_interactive), "Figures/penguin_bar_chart.html")
+```
+
+### Code for Box Plot (Penguin Flipper Length Across Species)
+ 
+```r
+# Box Plot
+(box_plot <- ggplot(data = penguins, aes(x = species, y = flipper_length_mm, fill = species)) +
+    geom_boxplot() +
+    labs(
+      title = "Box Plot of Flipper Length Across Penguin Species",
+      x = "Species",
+      y = "Flipper Length (mm)"
+    ) +
+    theme_minimal())
+
+# Convert to interactive plot
+(box_plot_interactive <- ggplotly(box_plot))
+# save plot
+htmlwidgets::saveWidget(as_widget(box_plot_interactive), "Figures/penguin_box_plot.html")
+```
+</details>
 
 ##### Plotly graph 
 
