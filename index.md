@@ -10,7 +10,7 @@ ___
   
 #### <a href="#section1"> 1. Introduction to interactive plots using `plotly` </a>
 
-#### <a href="#section2"> 2. Interactive map visualisations using `leaflet` </a>
+#### <a href="#section2"> 2. Interactive map visualisations </a>
 
 #### <a href="#section3"> 3. Interactive data dashboards: combining `plotly` and `leaflet`</a>
 
@@ -263,27 +263,69 @@ As an activity, edit these colours and fonts to get comfortable with the functio
       bordercolor = "black" # Border color of tooltip
     )))
 ```
-The topics we have covered 
+
 > the colours of text and background in tooltips can be of particluar importance when considering users with colour blindness. You want to ensure the plot is accessible to all viewers so remember to consider clarity.
 
 This introduction to `plot_ly` has focused a on scatter plot but it spans a wide range of graphs, and the tools above can be applied in a similar way to plots such as  line graphs, histograms, box plots, pie charts etc.
 
+> #### As an extension activity you could take the two plots we made in activity 1, and create them directly using `plot_ly`, customising the tooltips on those graphs, as we have just learnt how to. 
+
 <a name="section2"></a>
 
-## 2. Interactive map visualisations using `leaflet`
+## 2. Interactive map visualisations
 
+We have focused on graphs in this tutorial so far, however, `plotly's` interactivity is not just limited to plots, it can also be used to create interactive maps.
 
+Such maps are useful when visualising data with a spatial element. For example, we have been working with data on penguins from three different islands in Antartica, and depending on the purpose of your data visualisation, being able to see locations or distributions may be useful.
+
+Lets begin exploring maps by creating a map that pinpoints our three islands. Basic maps like these, that just visualise ditribution, are created by specifying `type = 'scatterboxmap'`within `plot_ly`.
+
+Now, because the palmerpenguins dataset only contains island names, rather than co-ordinates, we need to do some editing to the date frame to include these. I have found approximate co ordinates using google maps for this tutorial.
+
+Adding co ordinates to data:
 
 ```r
-
-
+# Assign specific coordinates for each island
+penguins_with_coords <- penguins %>%
+  mutate(
+    latitude = case_when( 
+      island == "Torgersen" ~ -64.772645,
+      island == "Dream" ~ -64.726345,
+      island == "Biscoe" ~ -65.713383,  # Using Renaud Island as the reference for Biscoe
+      TRUE ~ NA_real_  # Assign NA for any islands not listed
+    ),
+    longitude = case_when(
+      island == "Torgersen" ~ -64.074500,
+      island == "Dream" ~ -64.224375,
+      island == "Biscoe" ~ -65.972880,  # Using Renaud Island's longitude
+      TRUE ~ NA_real_  # Assign NA for any islands not listed
+    ))
 ```
+Now our data is prepared we can bstart thinking about how to map it. 
 
-
-
+__Setting up the map__
 ```r
-
+map_plot <- plot_ly(
+  data = penguins_with_coords,  # Use the dataset with latitude and longitude
+  x = ~longitude,              # Set longitude for the x-axis
+  y = ~latitude,               # Set latitude for the y-axis
+  type = 'scattermapbox',      # Specify map type
+  mode = 'markers',            # Represent data points as markers
+  color = ~species,            # Color markers by penguin species
+  hoverinfo = 'text',          # Customize what appears in tooltips
+  text = ~paste("Species:", species, "<br>Island:", island) # Tooltip content
+)
 ```
+Before we make any more edits to the map we need to understand what the above code has done:
+
+- Data: the `penguins_with_cords` that we have just created provides the location co ordinates for the map and contains other information on the penguins that can be displayed in more complex maps
+- Coordinates: `x = ~longitude` and `y= ~latitude` determine where the markers will sit on the map
+- Type: `scattermapbox` allows this type of interactive map to be plotted
+
+> Different maps that can be defined include
+> 1. scatterboxmap - these display data points as markers on a Mapbox map and is commonly used for geospatial scatter plots
+> 2. choroplethmapbox - displays areas filled with colours based on data values, needs files that define region values to work
+> 3. densitymapbox - a heatmap styep map that displays density respresented with colours, it needs ...
 
 
 ```r
@@ -302,15 +344,9 @@ More text, code and images.
 
 This is the end of the tutorial. Summarise what the student has learned, possibly even with a list of learning outcomes. In this tutorial we learned:
 
-##### - how to generate fake bivariate data
-##### - how to create a scatterplot in ggplot2
+##### - how to convert and make interactive plots
+##### - an introduction to intercative map visualisation in plotly
 ##### - some of the different plot methods in ggplot2
-
-We can also provide some useful links, include a contact form and a way to send feedback.
-
-For more on `ggplot2`, read the official <a href="https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf" target="_blank">ggplot2 cheatsheet</a>.
-
-Everything below this is footer material - text and links that appears at the end of all of your tutorials.
 
 <hr>
 <hr>
