@@ -146,10 +146,10 @@ These distinctions are made within `layout()` when you make plot_ly graphs direc
 > 3. Check your results against the provided solutions below.
 
 ---
-
 <details>
-  <summary><b>Click to reveal what the code could look like</b></summary>
+	<summary><b>Click to reveal the code</b></summary>
 	### Code for Bar Chart and Box Plot
+
 ```r
 # bar Chart
 (bar_chart <- ggplot(data = penguins, aes(x = species, fill = species)) +
@@ -182,7 +182,7 @@ htmlwidgets::saveWidget(as_widget(bar_chart_interactive), "Figures/penguin_bar_c
 htmlwidgets::saveWidget(as_widget(box_plot_interactive), "Figures/penguin_box_plot.html")
 
 ```
-	
+
 </details>
 
 <details>
