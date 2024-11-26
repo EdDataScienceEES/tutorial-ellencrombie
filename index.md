@@ -148,7 +148,8 @@ These distinctions are made within `layout()` when you make plot_ly graphs direc
 ---
 <details>
 	<summary><b>Click to reveal the code</b></summary>
-	### Code for Bar Chart and Box Plot
+
+### Code for Bar Chart and Box Plot
 
 ```r
 # bar Chart
@@ -180,9 +181,7 @@ htmlwidgets::saveWidget(as_widget(bar_chart_interactive), "Figures/penguin_bar_c
 (box_plot_interactive <- ggplotly(box_plot))
 # save plot
 htmlwidgets::saveWidget(as_widget(box_plot_interactive), "Figures/penguin_box_plot.html")
-
 ```
-
 </details>
 
 <details>
