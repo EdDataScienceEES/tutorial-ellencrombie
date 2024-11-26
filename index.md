@@ -243,7 +243,9 @@ htmlwidgets::saveWidget(as_widget(penguin_plotly_2), "code_output/penguin_plotly
 
 ```
 
+<div style="text-align: center;">
 <iframe src="Figures/penguin_plotly_2.html" width="800" height="600"></iframe>
+</div>
 
 That looks clearer now! The use of hover effects and tooltips on your own graphs is entirely determined by what you want to get across so think carefully about the purpose and audience of your plots when making edits to them. 
 
