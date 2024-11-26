@@ -335,6 +335,8 @@ Back to our map, what should it look like?
 
 
 ```r
+add full map code here
+then add bubble map
 
 ```
 
