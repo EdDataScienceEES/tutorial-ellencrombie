@@ -146,10 +146,8 @@ These distinctions are made within `layout()` when you make plot_ly graphs direc
 > 3. Check your results against the provided solutions below.
 
 ---
-<details>
-	<summary><b>Click to reveal the code</b></summary>
 
-### Code for Bar Chart and Box Plot
+#### Code for Bar Chart and Box Plot: check after attempting yourself for the best practice !
 
 ```r
 # bar Chart
@@ -182,19 +180,19 @@ htmlwidgets::saveWidget(as_widget(bar_chart_interactive), "Figures/penguin_bar_c
 # save plot
 htmlwidgets::saveWidget(as_widget(box_plot_interactive), "Figures/penguin_box_plot.html")
 ```
-</details>
 
 <details>
   <summary><b>Click to reveal what the graphs could look like</b></summary>
 
 <div style="text-align: center;">
-    <iframe src="Figures/penguin_bar_chart.html" width="600" height="400" style="border:none;"></iframe>
+    <iframe src="Figures/penguin_bar_chart.html" width="600" height="500" style="border:none;"></iframe>
 </div>
 
 \
 
+
 <div style="text-align: center;">
-    <iframe src="Figures/penguin_box_plot.html" width="600" height="400" style="border:none;"></iframe>
+    <iframe src="Figures/penguin_box_plot.html" width="600" height="500" style="border:none;"></iframe>
 </div>
 
 </details>
@@ -261,7 +259,7 @@ As an activity, edit these colours and fonts to get comfortable with the functio
 The topics we have covered 
 > the colours of text and background in tooltips can be of particluar importance when considering users with colour blindness. You want to ensure the plot is accessible to all viewers so remember to consider clarity.
 
-This intorduction to `plotly` has focused a on scatter plot but it spans a wide range of graphs, and the tools above can be applied in a similar way to plots such as  line graphs, histograms, box plots, pie charts etc.
+This introduction to `plot_ly` has focused a on scatter plot but it spans a wide range of graphs, and the tools above can be applied in a similar way to plots such as  line graphs, histograms, box plots, pie charts etc.
 
 <a name="section2"></a>
 
