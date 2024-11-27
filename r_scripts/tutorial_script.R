@@ -14,7 +14,7 @@ library(palmerpenguins) # Load penguin dataset for analysis and visualisation.
 library(ggplot2) # For creating static data visualisations
 library(plotly) # For interactive data visualistation
 library(dplyr) # Used for data organisation
-library(shiny)
+library(shiny) # Combining interactive plots in an app
 
 # Loading data ----
 penguin_data <- na.omit(penguins) # assign the data as an object - allows easier exploration as 
@@ -179,7 +179,7 @@ htmlwidgets::saveWidget(as_widget(bubble_map), "Figures/bubble_map.html")
 # Saving multiple plots as an app ----
 # Define the UI for the Shiny app
 ui <- fluidPage(
-  titlePanel("Penguin Data Visualization"),
+  titlePanel("Penguin Data Visualisation"),
   sidebarLayout(
     sidebarPanel(
       p("This app displays a scaled interactive bubble map of penguin population and a scatter plot of penguin bill data.")
