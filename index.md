@@ -10,7 +10,7 @@ ___
   
 #### <a href="#section1"> 1. Introduction to interactive plots using `plotly` </a>
 
-#### <a href="#section2"> 2. Interactive map visualisations using `leaflet` </a>
+#### <a href="#section2"> 2. Interactive map visualisations </a>
 
 #### <a href="#section3"> 3. Interactive data dashboards: combining `plotly` and `leaflet`</a>
 
@@ -106,8 +106,9 @@ Lets begin with a simple plot, the only extra information I'm adding is specifyi
 ```
 It should look like this:
 
+<div style="text-align: center;">
 <img src="Figures/penguin_plot.png" width="800" height="600" />
-
+</div>
 ## Interactive Plots of Penguin Data
 
 Now, lets convert this basic plot into an interactive one !
@@ -115,7 +116,9 @@ Now, lets convert this basic plot into an interactive one !
 # Convert ggplot2 to plotly
 (penguin_plotly <- ggplotly(penguin_plot))
 ```
+<div style="text-align: center;">
 <iframe src="Figures/penguin_plotly.html" width="800" height="600"></iframe>
+</div>
 
 > ### Try hovering your cursor over points on the plot ... what information do you see?
 You should see information on penguin ...
@@ -146,10 +149,10 @@ These distinctions are made within `layout()` when you make plot_ly graphs direc
 > 3. Check your results against the provided solutions below.
 
 ---
-<details>
-  <summary><b>Click to reveal the code and what the graphs could look like</b></summary>
+#### Check this code after attempting yourself for the best practice !
+#### Example code for Basic Bar Chart and Box Plot:
+Remember, there are different addittions you can make here, so your code might not look exactly the same but still produce a similar (or even better!) plot. These examples just provide a baseline.
 
-### Code for Bar Chart
 ```r
 # bar Chart
 (bar_chart <- ggplot(data = penguins, aes(x = species, fill = species)) +
@@ -166,9 +169,6 @@ These distinctions are made within `layout()` when you make plot_ly graphs direc
 # save plot
 htmlwidgets::saveWidget(as_widget(bar_chart_interactive), "Figures/penguin_bar_chart.html")
 ```
-
-### Code for Box Plot (Penguin Flipper Length Across Species)
- 
 ```r
 # Box Plot
 (box_plot <- ggplot(data = penguins, aes(x = species, y = flipper_length_mm, fill = species)) +
@@ -185,6 +185,21 @@ htmlwidgets::saveWidget(as_widget(bar_chart_interactive), "Figures/penguin_bar_c
 # save plot
 htmlwidgets::saveWidget(as_widget(box_plot_interactive), "Figures/penguin_box_plot.html")
 ```
+\
+<details>
+  <summary><b>Click to reveal what the graphs could look like</b></summary>
+
+<div style="text-align: center;">
+    <iframe src="Figures/penguin_bar_chart.html" width="600" height="400" style="border:none;"></iframe>
+</div>
+
+\
+
+
+<div style="text-align: center;">
+    <iframe src="Figures/penguin_box_plot.html" width="600" height="400" style="border:none;"></iframe>
+</div>
+
 </details>
 
 ##### Plotly graph 
@@ -228,7 +243,9 @@ htmlwidgets::saveWidget(as_widget(penguin_plotly_2), "code_output/penguin_plotly
 
 ```
 
+<div style="text-align: center;">
 <iframe src="Figures/penguin_plotly_2.html" width="800" height="600"></iframe>
+</div>
 
 That looks clearer now! The use of hover effects and tooltips on your own graphs is entirely determined by what you want to get across so think carefully about the purpose and audience of your plots when making edits to them. 
 
@@ -246,30 +263,100 @@ As an activity, edit these colours and fonts to get comfortable with the functio
       bordercolor = "black" # Border color of tooltip
     )))
 ```
-The topics we have covered 
+
 > the colours of text and background in tooltips can be of particluar importance when considering users with colour blindness. You want to ensure the plot is accessible to all viewers so remember to consider clarity.
 
-This intorduction to `plotly` has focused a on scatter plot but it spans a wide range of graphs, and the tools above can be applied in a similar way to plots such as  line graphs, histograms, box plots, pie charts etc.
+This introduction to `plot_ly` has focused a on scatter plot but it spans a wide range of graphs, and the tools above can be applied in a similar way to plots such as  line graphs, histograms, box plots, pie charts etc.
+
+> #### As an extension activity you could take the two plots we made in activity 1, and create them directly using `plot_ly`, customising the tooltips on those graphs, as we have just learnt how to. 
 
 <a name="section2"></a>
 
-## 2. Interactive map visualisations using `leaflet`
+## 2. Interactive map visualisations
 
+We have focused on graphs in this tutorial so far, however, `plotly's` interactivity is not just limited to plots, it can also be used to create interactive maps.
 
+Such maps are useful when visualising data with a spatial element. For example, we have been working with data on penguins from three different islands in Antartica, and depending on the purpose of your data visualisation, being able to see locations or distributions may be useful.
+
+Lets begin exploring maps by creating a map that pinpoints our three islands. Basic maps like these, that just visualise ditribution, are created by specifying `type = 'scatterboxmap'`within `plot_ly`.
+
+Now, because the palmerpenguins dataset only contains island names, rather than coordinates, we need to do some editing to the date frame to include these. I have found approximate co ordinates using google maps for this tutorial.
+
+Adding coordinates to data:
 
 ```r
+# Assign specific coordinates for each island
+penguins_with_coords <- penguins %>%
+  mutate(
+    latitude = case_when( 
+      island == "Torgersen" ~ -64.772645,
+      island == "Dream" ~ -64.726345,
+      island == "Biscoe" ~ -65.713383,  # Using Renaud Island as the reference for Biscoe
+      TRUE ~ NA_real_  # Assign NA for any islands not listed
+    ),
+    longitude = case_when(
+      island == "Torgersen" ~ -64.074500,
+      island == "Dream" ~ -64.224375,
+      island == "Biscoe" ~ -65.972880,  # Using Renaud Island's longitude
+      TRUE ~ NA_real_  # Assign NA for any islands not listed
+    ))
+```
+Now our data is prepared we can start thinking about how to map it. 
 
+__Creating the Map__
+
+It's important to understand what the code we're going to look at is actually doing:
+
+- Data: the `penguins_with_cords` that we have just created provides the location co ordinates for the map and contains other information on the penguins that can be displayed in more complex maps
+- Coordinates: `x = ~longitude` and `y= ~latitude` determine where the markers will sit on the map
+- Type: `scattermapbox` allows this type of interactive map to be plotted
+
+> Different maps that can be defined include
+> 1. `scatterboxmap` - these display data points as markers on a Mapbox map and is commonly used for geospatial scatter plots
+> 2. `choroplethmapbox` - displays areas filled with colours based on data values, needs files that define region values to work
+> 3. `densitymapbox` - a heatmap style map that displays density respresented with colours, it needs coordinate inputs for points, groups into density regions
+
+- Mode: `markers` displays data as individuals points
+- Colour: gives each point a different colour based on penguin species
+- Tooltips: changes what's displayed when you hover over points (used in the same way it is for graphs!)
+
+__Map Layout__
+
+Edits made to the layout of our map include:
+
+- Adding an informative title
+- Specifying the map style using `mapbox =` and within this deciding style, where to centre the map view, and what zoom level to have as the starting point (before users can then zoom in and out)
+- We have used the style `carto-positron` in this first map, this offers a light coloured map, with a minimalistic design, but there are different map styles that change what type of map you see your data preseneted on.
+
+__Code in Action__
+```r
+# interactive map 
+(map_plot <- plot_ly(
+  data = penguins_with_coords,  # use the new dataset that has coordinates
+  x = ~longitude,              # set longitude for the x-axis
+  y = ~latitude,               # set latitude for the y-axis
+  type = 'scattermapbox',      # choose map type
+  mode = 'markers',            # represent data points as markers
+  color = ~species,            # colour points based on penguin species
+  hoverinfo = 'text',          # change what appears in tooltips
+  text = ~paste("Species:", species, "<br>Island:", island)
+) %>%
+  layout(
+    title = "Map of Penguin Population Locations", # informative title
+    mapbox = list(
+      style = "carto-positron",  # choose map style
+      center = list(lon = -64, lat = -65), # where map should be centred when first displayed
+      zoom = 5 # how zoomed in it shoud be
+    )
+  ))
 
 ```
-
-
-
-```r
-
-```
+The Map produced should look like this!
 
 
 ```r
+add full map code here
+then add bubble map
 
 ```
 
@@ -285,15 +372,9 @@ More text, code and images.
 
 This is the end of the tutorial. Summarise what the student has learned, possibly even with a list of learning outcomes. In this tutorial we learned:
 
-##### - how to generate fake bivariate data
-##### - how to create a scatterplot in ggplot2
+##### - how to convert and make interactive plots
+##### - an introduction to intercative map visualisation in plotly
 ##### - some of the different plot methods in ggplot2
-
-We can also provide some useful links, include a contact form and a way to send feedback.
-
-For more on `ggplot2`, read the official <a href="https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf" target="_blank">ggplot2 cheatsheet</a>.
-
-Everything below this is footer material - text and links that appears at the end of all of your tutorials.
 
 <hr>
 <hr>
