@@ -301,7 +301,7 @@ Lets begin exploring maps by creating a map that pinpoints our three islands. Ba
 
 Now, because the palmerpenguins dataset only contains island names, rather than coordinates, we need to do some editing to the date frame to include these. I have found approximate co ordinates using google maps for this tutorial.
 
-I am also adding an colomn to indiacte population size (based on isladn the penguin came from as this will be intergrated into the map as well.
+I am also adding an column to indicate population size (based on island the penguin came from as this will be integrated into the map as well.
 
 Making additions to data:
 
@@ -393,7 +393,7 @@ The map produced should look like this!
 
 As you can see, the interactive map now displays data on the penguins (I have chosen to include species, island, and population) while also placing this data in a geographic context. 
 
-Additionally, the markers on the map can also be used to display data, points can be scaled to respresent values such as averages or population size. In the map above population size is included in the tooltip info, let's see how to use a bubble map to chnage this and instead display population size s represented by the size of location markers.
+Additionally, the markers on the map can also be used to display data, points can be scaled to respresent values such as averages or population size. In the map above population size is included in the tooltip info, let's see how to use a bubble map to chnage this and instead display population size as represented by the size of location markers.
 
 
 ```r
@@ -483,13 +483,20 @@ The app that appears in a new window in R should look like this but retain full 
   <img src="https://github.com/user-attachments/assets/77740abb-c046-4377-ab81-7de4a1e64d23" alt="Description of Image" width="500">
 </div>
 
-This was just a brief overview of one way shiny can be used, check out a prevoius coding club tutorial [here](https://ourcodingclub.github.io/tutorials/shiny/) for more detail on shiny, and on how to export apps running on local links (what you have just created!) into published apps that can be embedded into websites.
+This was just a brief overview of one way shiny can be used, check out a previous coding club tutorial [here](https://ourcodingclub.github.io/tutorials/shiny/) for more detail on shiny, and on how to export apps running on local links (what you have just created!) into published apps that can be embedded into websites.
 
 Take a minute to recap, in this tutorial we  have learned:
 
 ##### - how to convert and make interactive plots
 ##### - an introduction to interactive map visualisation
 ##### - how to present multiple plots in an interactive web application
+
+... and all with the help of our penguins !
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/da3e6138-44e7-49f2-b0f8-c1421e0bbe72" alt="Description of image" width="300">
+	Artwork by @allison_horst.
+</p>
 
 <hr>
 <hr>
