@@ -6,13 +6,17 @@
 ## YOUR NAME
 ## DATE
 
+# NOTE: this is the code used to create the tutorial, when saving your own 
+ # plots and maps, edit your file path accordingly
+
 # Libraries ----
 library(palmerpenguins) # Load penguin dataset for analysis and visualisation.
 library(ggplot2) # For creating static data visualisations
-library(plotly) # # For interactive data visualistation
+library(plotly) # For interactive data visualistation
+library(dplyr) # Used for data organisation
 
 # Loading data ----
-penguin_data <- penguins # assign the data as an object - allows easier exploration as 
+penguin_data <- na.omit(penguins) # assign the data as an object - allows easier exploration as 
 # you can open the data table from your environment
 
 
@@ -89,15 +93,45 @@ htmlwidgets::saveWidget(as_widget(box_plot_interactive), "Figures/penguin_box_pl
 # save the improved plot as a HTML file
 htmlwidgets::saveWidget(as_widget(penguin_plotly_2), "Figures/penguin_plotly_2.html")
 
+## Section 2:
+# Interactive Maps ----
+# Assign specific coordinates for each island
+penguins_with_coords <- penguins %>%
+  mutate(
+    latitude = case_when( 
+      island == "Torgersen" ~ -64.772645,
+      island == "Dream" ~ -64.726345,
+      island == "Biscoe" ~ -65.713383,  # using Renaud Island as the reference for Biscoe
+      TRUE ~ NA_real_  # sssign NA for any islands not listed
+    ),
+    longitude = case_when(
+      island == "Torgersen" ~ -64.074500,
+      island == "Dream" ~ -64.224375,
+      island == "Biscoe" ~ -65.972880,  
+      TRUE ~ NA_real_  
+    ))
 
+# interactive map 
+(map_plot <- plot_ly(
+  data = penguins_with_coords,  # use the new dataset that has coordinates
+  x = ~longitude,              # set longitude for the x-axis
+  y = ~latitude,               # set latitude for the y-axis
+  type = 'scattermapbox',      # choose map type
+  mode = 'markers',            # represent data points as markers
+  color = ~species,            # colour points based on penguin species
+  hoverinfo = 'text',          # change what appears in tooltips
+  text = ~paste("Species:", species, "<br>Island:", island)
+) %>%
+    layout(
+      title = "Map of Penguin Population Locations", # informative title
+      mapbox = list(
+        style = "carto-positron",  # choose map style
+        center = list(lon = -64, lat = -65), # where map should be centred when first displayed
+        zoom = 5 # how zoomed in it shoud be
+      )
+    ))
 
-  # direct plotly box plot
-plot_ly(
-  data = penguin_data, 
-  x = ~species,          # Group by species on the x-axis
-  y = ~flipper_length_mm, # Flipper length on the y-axis
-  type = "box")
-
-
+# save the map 
+htmlwidgets::saveWidget(as_widget(map_plot), "Figures/penguin_map.html")
 
 
