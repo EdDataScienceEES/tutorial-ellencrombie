@@ -176,6 +176,7 @@ htmlwidgets::saveWidget(as_widget(map_plot), "Figures/penguin_map.html")
 # save the map 
 htmlwidgets::saveWidget(as_widget(bubble_map), "Figures/bubble_map.html")
 
+# Saving multiple plots as an app ----
 # Define the UI for the Shiny app
 ui <- fluidPage(
   titlePanel("Penguin Data Visualization"),
@@ -206,12 +207,3 @@ server <- function(input, output, session) {
 
 # Run the application
 shinyApp(ui = ui, server = server)
-
-
-install.packages("rsconnect")
-library(rsconnect)
-rsconnect::setAccountInfo(name='ellencrombie',
-                          token='BF7AB163611E5D33B9066ABD9C49BDFA',
-                          secret='k3PtpDSO1fauzLqECS3bRxByVvFM9UdLC68RdPtO')
-
-deployApp('C:/Users/ellen/OneDrive - University of Edinburgh/Year 3/Data Science/R Projects/tutorial-ellencrombie/r_scripts/Shiny')
