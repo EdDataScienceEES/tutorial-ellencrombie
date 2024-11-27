@@ -10,5 +10,5 @@ ___
 
 - `index.md`: The tutorial itself, designed to render as a website on GitHub pages.
 - `Figures/`: Contains interactive maps and plots generated during the tutorial.
-- instructions.md: Contains assignment instructions (not relevant to those completing the tutorial
+- `instructions.md`: Contains assignment instructions (not relevant to those completing the tutorial
 - `README.md`: This file, providing an overview of the repository and tutorial.
