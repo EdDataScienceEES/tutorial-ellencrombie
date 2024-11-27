@@ -15,6 +15,7 @@ library(ggplot2) # For creating static data visualisations
 library(plotly) # For interactive data visualistation
 library(dplyr) # Used for data organisation
 library(shiny) # Combining interactive plots in an app
+library(htmlwidgets) # Allows saving of interactive plots
 
 # Loading data ----
 penguin_data <- na.omit(penguins) # assign the data as an object - allows easier exploration as 
@@ -93,6 +94,36 @@ htmlwidgets::saveWidget(as_widget(box_plot_interactive), "Figures/penguin_box_pl
 
 # save the improved plot as a HTML file
 htmlwidgets::saveWidget(as_widget(penguin_plotly_2), "Figures/penguin_plotly_2.html")
+
+(penguin_plotly_3 <- plot_ly(
+  data = penguin_data,
+  x = ~bill_length_mm,
+  y = ~bill_depth_mm,
+  color = ~species,  # Different colors for species
+  text = ~paste(
+    "Species:", species, # this information specifies what should be inlcuded
+    "<br>Bill Length:", bill_length_mm, "mm", # in the tooltips
+    "<br>Bill Depth:", bill_depth_mm, "mm",
+    "<br>Island:", island,
+    "<br>Sex:", sex
+  ),
+  hoverinfo = "text",  # display the customised text in tooltips
+  type = "scatter",
+  mode = "markers"     # Scatterplot with points
+) %>%
+  layout(
+    title = "Interactive Scatter Plot of Penguin Bill Data",
+    xaxis = list(title = "Bill Length (mm)"),
+    yaxis = list(title = "Bill Depth (mm)")
+  ) %>% 
+  style(  # change the hover text appearance
+    hoverlabel = list(
+      bgcolor = "white",      # Background color of tooltip
+      font = list(size = 12, color = "black"),  # Font size and color
+      bordercolor = "black" # Border color of tooltip
+    )))
+
+htmlwidgets::saveWidget(as_widget(penguin_plotly_3), "Figures/penguin_plotly_3.html")
 
 ## Section 2:
 # Interactive Maps ----
