@@ -353,6 +353,10 @@ __Code in Action__
 ```
 The Map produced should look like this!
 
+<div style="text-align: center;">
+    <iframe src="Figures/penguin_map.html" width="800" height="600" style="border:none;"></iframe>
+</div>
+
 
 ```r
 add full map code here
