@@ -282,6 +282,7 @@ To practice this, edit these colours and fonts to get comfortable with the funct
 
 </details>
 
+
 > the colours of text and background in tooltips can be of particluar importance when considering users with colour blindness. You want to ensure the plot is accessible to all viewers so remember to consider clarity.
 
 This introduction to `plot_ly` has focused a on scatter plot but it spans a wide range of graphs, and the tools above can be applied in a similar way to plots such as  line graphs, histograms, box plots, pie charts etc.
