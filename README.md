@@ -8,7 +8,8 @@ ___
 
 ## Repository Structure
 
-- `index.md`: The tutorial itself, designed to render as a website on GitHub pages.
+- ### `index.md`: The tutorial itself, designed to render as a website on GitHub pages.
 - `Figures/`: Contains interactive maps and plots generated during the tutorial.
+- `r_scripts/`: Contains the script used to develop the code that's inserted into `index.md` file
 - `instructions.md`: Contains assignment instructions (not relevant to those completing the tutorial
 - `README.md`: This file, providing an overview of the repository and tutorial.
