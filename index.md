@@ -4,7 +4,7 @@
 
 ___
 # Data Visualisation Continued: Interactive Visualisations 
-#### Created by Ellen Crombie - last updated November 2024
+#### Created by Ellen Crombie - last updated 27th November 2024
 ### Tutorial Sections
 - Click on these sections to be taken directly to them!
   
@@ -259,7 +259,7 @@ That looks clearer now! The use of hover effects and tooltips on your own graphs
 
 In our glossary ealier `style()` was introduced, have a play around with this. It is used to edit the appearance of tooltips. Some example code is provided below, this would be added via a pipe `%>%` after our edits made to layout.
 
-As an activity, edit these colours and fonts to get comfortable with the function.
+To practice this, edit these colours and fonts to get comfortable with the function.
 
 ```r
 # add this on to previous code from the graph
@@ -269,8 +269,18 @@ As an activity, edit these colours and fonts to get comfortable with the functio
       bgcolor = "white",      # Background color of tooltip
       font = list(size = 12, color = "black"),  # Font size and color
       bordercolor = "black" # Border color of tooltip
-    )))
+    ))) # ensure the correct amount of brackets after adding this. list () and style () need to be closed, and another ) is needed if there is a ( at the 
+        # very start of your code
+
 ```
+<details>
+  <summary><b>Click to reveal what these tooltip would look like</b></summary>
+
+<div style="text-align: center;">
+<iframe src="Figures/penguin_plotly_3.html" width="800" height="600"></iframe>
+</div>
+
+</details>
 
 > the colours of text and background in tooltips can be of particluar importance when considering users with colour blindness. You want to ensure the plot is accessible to all viewers so remember to consider clarity.
 
