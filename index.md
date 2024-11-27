@@ -86,6 +86,8 @@ This dataset can be called directly into R within libaries.
 library(palmerpenguins) # Load penguin dataset for analysis and visualisation.
 library(ggplot2) # For creating static data visualisations
 library(plotly) # # For interactive data visualistation
+library(dplyr) # Used for data organisation
+library(shiny) # Combining interactive plots in an app
 
 # Loading data ----
 # assign the data as an object - allows easier exploration, you can open the data table from your environment
@@ -101,7 +103,7 @@ As you will be familiar with `ggplot` plots, lets start there!
 Lets begin with a simple plot, the only extra information I'm adding is specifying `colour = species` so we can distinguish data points by penguin species
 ```r
 # Create a ggplot2 scatterplot
-(penguin_plot <- ggplot(data = penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
+(penguin_plot <- ggplot(data = penguin_data, aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
   geom_point())
 ```
 It should look like this:
@@ -155,7 +157,7 @@ Remember, there are different addittions you can make here, so your code might n
 
 ```r
 # bar Chart
-(bar_chart <- ggplot(data = penguins, aes(x = species, fill = species)) +
+(bar_chart <- ggplot(data = penguin_data, aes(x = species, fill = species)) +
   geom_bar() +
   labs(
     title = "Bar Chart of Penguin Species Count",
@@ -171,7 +173,7 @@ htmlwidgets::saveWidget(as_widget(bar_chart_interactive), "Figures/penguin_bar_c
 ```
 ```r
 # Box Plot
-(box_plot <- ggplot(data = penguins, aes(x = species, y = flipper_length_mm, fill = species)) +
+(box_plot <- ggplot(data = penguin_data, aes(x = species, y = flipper_length_mm, fill = species)) +
     geom_boxplot() +
     labs(
       title = "Box Plot of Flipper Length Across Penguin Species",
@@ -284,7 +286,7 @@ Now, because the palmerpenguins dataset only contains island names, rather than 
 
 I am also adding an colomn to indiacte population size (based on isladn the penguin came from as this will be intergrated into the map as well.
 
-Making dditions to data:
+Making additions to data:
 
 ```r
 # Assign coordinates for each island
@@ -392,16 +394,81 @@ You will notice that the size of the markers remains relative to eachother even 
 
 <a name="section3"></a>
 
-## 3. Embedding multiple plots into an interactive application
+## 3. Presenting multiple plots in an interactive application
 
+Being able to present multiple plots together can be useful if their findings relate to one another, and when combining multiple __interactive__ plots this can be achieved through the use of the framework `shiny`.
 
+- shiny can be used to intergrate multiple of the plots/maps we have created in this tutorial, lets save our most recent scaled map, and the first interactive plolty plot we made 
 
+To do this we need to determine:
 
-In this tutorial we learned:
+1. __The UI (User Interface)__
+
+The user interface determines what the app looks like and it includes:
+- a `titlePanel` displaying an informative title that provides cotext to what the app does or displays, in our case "Palmer penguins Data Visualisation"
+- a `sidebarLayout` that organises the app into two sections
+  
+  i) the `sidebarPanel` should contain a paragraph describing what the purpose of the app is, and any extra information needed to interpret the plots/maps contained within it
+  
+  ii) the `mainPanel` is the section where the interactive plot and map will be rendered
+
+2. __The Server Logic__
+
+This handles how the app works, it is responsible for generating the visualisations and getting them to where they should be within UI placeholders.
+
+- `renderPlotly({...})` is used to generatethe plots interactively with Plotly
+
+3. __Combining the two__
+
+Running the app (see code below) then combines the UI an dserver components to create the working app. The app will appear in a viewing window after this has beeen completed
+
+Below is the code that does this:
+```r
+# Define the UI for the Shiny app
+ui <- fluidPage(
+  titlePanel("Palmer Penguins Data Visualisation"),
+  sidebarLayout(
+    sidebarPanel(
+      p("This app displays a scaled interactive bubble map of penguin population and a scatter plot of penguin bill data.")
+    ),
+    mainPanel(
+      plotlyOutput("map"),          # Output the map here
+      plotlyOutput("scatter_plot")  # Output the scatter plot here
+    )
+  )
+)
+
+# Define the server logic for the Shiny app
+server <- function(input, output, session) {
+  
+  # Render the map plot (scaled bubble map)
+  output$map <- renderPlotly({
+    bubble_map
+  })
+  
+  # Render the scatter plot (penguin bill data)
+  output$scatter_plot <- renderPlotly({
+    penguin_plotly_2
+  })
+}
+
+# Run the application
+shinyApp(ui = ui, server = server)
+```
+
+The app that appears in a new window in R should look like this but retain full interactivity (the image below is just a snapshot of the app so you can compare it to yours).
+
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/77740abb-c046-4377-ab81-7de4a1e64d23" alt="Description of Image" width="500">
+</div>
+
+This was just a brief overview of one way shiny can be used, check out a prevoius coding club tutorial [here](https://ourcodingclub.github.io/tutorials/shiny/) for more detail on shiny, and on how to export apps running on local links (what you have just created!) into published apps that can be embedded into websites.
+
+Take a minute to recap, in this tutorial we  have learned:
 
 ##### - how to convert and make interactive plots
 ##### - an introduction to interactive map visualisation
-##### - how to embedding multiple plots into one interactive web application
+##### - how to present multiple plots in an interactive web application
 
 <hr>
 <hr>
@@ -409,6 +476,7 @@ In this tutorial we learned:
 #### Related Tutorials
 - [Data Visualisation: Part 1](https://ourcodingclub.github.io/tutorials/datavis/)
 - [Data Visualisation: Part 2](https://ourcodingclub.github.io/tutorials/data-vis-2/)
+- [Shiny](https://ourcodingclub.github.io/tutorials/shiny/)
 
 #### Check out our <a href="https://ourcodingclub.github.io/links/" target="_blank">Useful links</a> page where you can find loads of guides and cheatsheets.
 
