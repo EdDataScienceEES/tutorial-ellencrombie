@@ -121,8 +121,8 @@ Now, lets convert this basic plot into an interactive one !
 ```r
 # Convert ggplot2 to plotly
 (penguin_plotly <- ggplotly(penguin_plot))
-# save plot
-
+# Save the ggplotly plot as an HTML file
+htmlwidgets::saveWidget(as_widget(penguin_plotly), "your_file_path/penguin_plotly.html")
 ```
 <div style="text-align: center;">
 <iframe src="Figures/penguin_plotly.html" width="800" height="600"></iframe>
