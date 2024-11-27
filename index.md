@@ -88,6 +88,7 @@ library(ggplot2) # For creating static data visualisations
 library(plotly) # # For interactive data visualistation
 library(dplyr) # Used for data organisation
 library(shiny) # Combining interactive plots in an app
+library(htmlwidgets) # allows saving of interactive plots/maps
 
 # Loading data ----
 # assign the data as an object - allows easier exploration, you can open the data table from your environment
@@ -105,6 +106,9 @@ Lets begin with a simple plot, the only extra information I'm adding is specifyi
 # Create a ggplot2 scatterplot
 (penguin_plot <- ggplot(data = penguin_data, aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
   geom_point())
+
+# save plot
+ggsave(filename = "your_file_path/penguin_plot.png", plot = penguin_plot, width = 8, height = 6, dpi = 300)
 ```
 It should look like this:
 
@@ -117,6 +121,8 @@ Now, lets convert this basic plot into an interactive one !
 ```r
 # Convert ggplot2 to plotly
 (penguin_plotly <- ggplotly(penguin_plot))
+# save plot
+
 ```
 <div style="text-align: center;">
 <iframe src="Figures/penguin_plotly.html" width="800" height="600"></iframe>
@@ -169,7 +175,7 @@ Remember, there are different addittions you can make here, so your code might n
 # convert to interactive plot
 (bar_chart_interactive <- ggplotly(bar_chart))
 # save plot
-htmlwidgets::saveWidget(as_widget(bar_chart_interactive), "Figures/penguin_bar_chart.html")
+htmlwidgets::saveWidget(as_widget(bar_chart_interactive), "your_file_path/penguin_bar_chart.html")
 ```
 ```r
 # Box Plot
@@ -185,7 +191,7 @@ htmlwidgets::saveWidget(as_widget(bar_chart_interactive), "Figures/penguin_bar_c
 # Convert to interactive plot
 (box_plot_interactive <- ggplotly(box_plot))
 # save plot
-htmlwidgets::saveWidget(as_widget(box_plot_interactive), "Figures/penguin_box_plot.html")
+htmlwidgets::saveWidget(as_widget(box_plot_interactive), "your_file_path/penguin_box_plot.html")
 ```
 
 <details>
@@ -241,7 +247,7 @@ Any information that's contained in the data table can be added, so in our case 
   ))
 
 # save the improved plot as a HTML file
-htmlwidgets::saveWidget(as_widget(penguin_plotly_2), "code_output/penguin_plotly_2.html")
+htmlwidgets::saveWidget(as_widget(penguin_plotly_2), "your_file_path/penguin_plotly_2.html")
 
 ```
 
@@ -365,6 +371,8 @@ __Code in Action__
         zoom = 5 # how zoomed in it shoud be
       )
     ))
+# save the map 
+htmlwidgets::saveWidget(as_widget(map_plot), "your_file_path/penguin_map.html")
 ```
 The map produced should look like this!
 
@@ -383,14 +391,16 @@ Additionally, the markers on the map can also be used to display data, points ca
 size = ~population_size
 
 ```
+> don't forget to create this new map under a new variable name, for ease in part three, name it `bubble_map`. And don't forget to save it.
+
+
 This change creates a map like this:
-
-
-You will notice that the size of the markers remains relative to eachother even as you zoom in and out around the map. This map also shows the difference in styles that can be used as it is `"open-street-map"` as opposed to `"carto-positron"`that was used in the first map. This is better suited to our data as it includeds specific island nameswhen you zoom in on the map.
 
 <div style="text-align: center;">
     <iframe src="Figures/bubble_map.html" width="800" height="600" style="border:none;"></iframe>
 </div>
+
+You will notice that the size of the markers remains relative to eachother even as you zoom in and out around the map. This map also shows the difference in styles that can be used as it is `"open-street-map"` as opposed to `"carto-positron"`that was used in the first map. This is better suited to our data as it includeds specific island nameswhen you zoom in on the map.
 
 <a name="section3"></a>
 
