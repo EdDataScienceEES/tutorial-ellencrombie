@@ -14,6 +14,7 @@ library(palmerpenguins) # Load penguin dataset for analysis and visualisation.
 library(ggplot2) # For creating static data visualisations
 library(plotly) # For interactive data visualistation
 library(dplyr) # Used for data organisation
+library(shiny)
 
 # Loading data ----
 penguin_data <- na.omit(penguins) # assign the data as an object - allows easier exploration as 
@@ -164,7 +165,7 @@ htmlwidgets::saveWidget(as_widget(map_plot), "Figures/penguin_map.html")
   )  # tooltip content
 ) %>%
   layout(
-    title = "Penguin Population Bubbl Map", # Map title
+    title = "Penguin Population Scaled Bubble Map", # Map title
     mapbox = list(
       style = "open-street-map",          # Map style
       center = list(lon = -64, lat = -65), # Initial map center
@@ -175,4 +176,42 @@ htmlwidgets::saveWidget(as_widget(map_plot), "Figures/penguin_map.html")
 # save the map 
 htmlwidgets::saveWidget(as_widget(bubble_map), "Figures/bubble_map.html")
 
+# Define the UI for the Shiny app
+ui <- fluidPage(
+  titlePanel("Penguin Data Visualization"),
+  sidebarLayout(
+    sidebarPanel(
+      p("This app displays a scaled interactive bubble map of penguin population and a scatter plot of penguin bill data.")
+    ),
+    mainPanel(
+      plotlyOutput("map"),          # Output the map here
+      plotlyOutput("scatter_plot")  # Output the scatter plot here
+    )
+  )
+)
 
+# Define the server logic for the Shiny app
+server <- function(input, output, session) {
+  
+  # Render the map plot (scaled bubble map)
+  output$map <- renderPlotly({
+    bubble_map
+  })
+  
+  # Render the scatter plot (penguin bill data)
+  output$scatter_plot <- renderPlotly({
+    penguin_plotly_2
+  })
+}
+
+# Run the application
+shinyApp(ui = ui, server = server)
+
+
+install.packages("rsconnect")
+library(rsconnect)
+rsconnect::setAccountInfo(name='ellencrombie',
+                          token='BF7AB163611E5D33B9066ABD9C49BDFA',
+                          secret='k3PtpDSO1fauzLqECS3bRxByVvFM9UdLC68RdPtO')
+
+deployApp('C:/Users/ellen/OneDrive - University of Edinburgh/Year 3/Data Science/R Projects/tutorial-ellencrombie/r_scripts/Shiny')
