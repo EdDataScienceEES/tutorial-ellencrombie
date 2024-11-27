@@ -12,7 +12,7 @@ ___
 
 #### <a href="#section2"> 2. Interactive map visualisations </a>
 
-#### <a href="#section3"> 3. Embedding multiple plots into an interactive web application `</a>
+#### <a href="#section3"> 3. Embedding multiple plots into an app (using shiny) `</a>
 
 ### Introduction
 ---------------------------
@@ -392,7 +392,7 @@ You will notice that the size of the markers remains relative to eachother even 
 
 <a name="section3"></a>
 
-## 3. Embedding multiple plots into an interactive web application
+## 3. Embedding multiple plots into an interactive application
 
 
 
