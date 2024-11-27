@@ -274,7 +274,7 @@ To practice this, edit these colours and fonts to get comfortable with the funct
 
 ```
 <details>
-  <summary><b>Click to reveal what these tooltip would look like</b></summary>
+  <summary><b>Click to reveal what these tooltips would look like</b></summary>
 
 <div style="text-align: center;">
 <iframe src="Figures/penguin_plotly_3.html" width="800" height="600"></iframe>
