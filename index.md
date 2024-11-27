@@ -134,7 +134,7 @@ You should see information on penguin ...
 2. Bill depth
 3. Species
    
-... that relates to the specifc point you are hovering over, and so changes as you move the cursor over the plot.
+... that relates to the specific point you are hovering over, and so changes as you move the cursor over the plot.
 
 The information displayed in these tooltips comes from the data supplied when creating the graph in the first place, however the content inside them can be altered to make the interactivity more useful and show information that wouldn't otherwise fit in the plot.
 
@@ -159,7 +159,7 @@ These distinctions are made within `layout()` when you make plot_ly graphs direc
 ---
 #### Check this code after attempting yourself for the best practice !
 #### Example code for Basic Bar Chart and Box Plot:
-Remember, there are different addittions you can make here, so your code might not look exactly the same but still produce a similar (or even better!) plot. These examples just provide a baseline.
+Remember, there are different additions you can make here, so your code might not look exactly the same but still produce a similar (or even better!) plot. These examples just provide a baseline.
 
 ```r
 # bar Chart
@@ -274,7 +274,7 @@ To practice this, edit these colours and fonts to get comfortable with the funct
 
 ```
 <details>
-  <summary><b>Click to reveal what these tooltip would look like</b></summary>
+  <summary><b>Click to reveal what these tooltips would look like</b></summary>
 
 <div style="text-align: center;">
 <iframe src="Figures/penguin_plotly_3.html" width="800" height="600"></iframe>
@@ -282,7 +282,8 @@ To practice this, edit these colours and fonts to get comfortable with the funct
 
 </details>
 
-> the colours of text and background in tooltips can be of particluar importance when considering users with colour blindness. You want to ensure the plot is accessible to all viewers so remember to consider clarity.
+
+> the colours of text and background in tooltips can be of particular importance when considering users with colour blindness. You want to ensure the plot is accessible to all viewers so remember to consider clarity.
 
 This introduction to `plot_ly` has focused a on scatter plot but it spans a wide range of graphs, and the tools above can be applied in a similar way to plots such as  line graphs, histograms, box plots, pie charts etc.
 
@@ -300,7 +301,7 @@ Lets begin exploring maps by creating a map that pinpoints our three islands. Ba
 
 Now, because the palmerpenguins dataset only contains island names, rather than coordinates, we need to do some editing to the date frame to include these. I have found approximate co ordinates using google maps for this tutorial.
 
-I am also adding an colomn to indiacte population size (based on isladn the penguin came from as this will be intergrated into the map as well.
+I am also adding an column to indicate population size (based on island the penguin came from as this will be integrated into the map as well.
 
 Making additions to data:
 
@@ -344,7 +345,7 @@ It's important to understand what the code we're going to look at is actually do
 > Different maps that can be defined include
 > 1. `scatterboxmap` - these display data points as markers on a Mapbox map and is commonly used for geospatial scatter plots
 > 2. `choroplethmapbox` - displays areas filled with colours based on data values, needs files that define region values to work
-> 3. `densitymapbox` - a heatmap style map that displays density respresented with colours, it needs coordinate inputs for points, groups into density regions
+> 3. `densitymapbox` - a heatmap style map that displays density represented with colours, it needs coordinate inputs for points, groups into density regions
 
 - Mode: `markers` displays data as individuals points
 - Colour: gives each point a different colour based on penguin species
@@ -356,7 +357,7 @@ Edits made to the layout of our map include:
 
 - Adding an informative title
 - Specifying the map style using `mapbox =` and within this deciding style, where to centre the map view, and what zoom level to have as the starting point (before users can then zoom in and out)
-- We have used the style `carto-positron` in this first map, this offers a light coloured map, with a minimalistic design, but there are different map styles that change what type of map you see your data preseneted on.
+- We have used the style `carto-positron` in this first map, this offers a light coloured map, with a minimalistic design, but there are different map styles that change what type of map you see your data presented on.
 
 __Code in Action__
 ```r
@@ -392,7 +393,7 @@ The map produced should look like this!
 
 As you can see, the interactive map now displays data on the penguins (I have chosen to include species, island, and population) while also placing this data in a geographic context. 
 
-Additionally, the markers on the map can also be used to display data, points can be scaled to respresent values such as averages or population size. In the map above population size is included in the tooltip info, let's see how to use a bubble map to chnage this and instead display population size s represented by the size of location markers.
+Additionally, the markers on the map can also be used to display data, points can be scaled to represent values such as averages or population size. In the map above population size is included in the tooltip info, let's see how to use a bubble map to chnage this and instead display population size as represented by the size of location markers.
 
 
 ```r
@@ -410,7 +411,7 @@ This change creates a map like this:
     <iframe src="Figures/bubble_map.html" width="800" height="600" style="border:none;"></iframe>
 </div>
 
-You will notice that the size of the markers remains relative to eachother even as you zoom in and out around the map. This map also shows the difference in styles that can be used as it is `"open-street-map"` as opposed to `"carto-positron"`that was used in the first map. This is better suited to our data as it includeds specific island nameswhen you zoom in on the map.
+You will notice that the size of the markers remains relative to eachother even as you zoom in and out around the map. This map also shows the difference in styles that can be used as it is `"open-street-map"` as opposed to `"carto-positron"`that was used in the first map. This is better suited to our data as it includes specific island names when you zoom in on the map.
 
 <a name="section3"></a>
 
@@ -418,14 +419,14 @@ You will notice that the size of the markers remains relative to eachother even 
 
 Being able to present multiple plots together can be useful if their findings relate to one another, and when combining multiple __interactive__ plots this can be achieved through the use of the framework `shiny`.
 
-- shiny can be used to intergrate multiple of the plots/maps we have created in this tutorial, lets save our most recent scaled map, and the first interactive plolty plot we made 
+- shiny can be used to integrate multiple of the plots/maps we have created in this tutorial, lets save our most recent scaled map, and the first interactive plolty plot we made 
 
 To do this we need to determine:
 
 1. __The UI (User Interface)__
 
 The user interface determines what the app looks like and it includes:
-- a `titlePanel` displaying an informative title that provides cotext to what the app does or displays, in our case "Palmer penguins Data Visualisation"
+- a `titlePanel` displaying an informative title that provides context to what the app does or displays, in our case "Palmer penguins Data Visualisation"
 - a `sidebarLayout` that organises the app into two sections
   
   i) the `sidebarPanel` should contain a paragraph describing what the purpose of the app is, and any extra information needed to interpret the plots/maps contained within it
@@ -436,11 +437,11 @@ The user interface determines what the app looks like and it includes:
 
 This handles how the app works, it is responsible for generating the visualisations and getting them to where they should be within UI placeholders.
 
-- `renderPlotly({...})` is used to generatethe plots interactively with Plotly
+- `renderPlotly({...})` is used to generate the plots interactively with Plotly
 
 3. __Combining the two__
 
-Running the app (see code below) then combines the UI an dserver components to create the working app. The app will appear in a viewing window after this has beeen completed
+Running the app (see code below) then combines the UI and server components to create the working app. The app will appear in a viewing window after this has been completed
 
 Below is the code that does this:
 ```r
@@ -482,13 +483,20 @@ The app that appears in a new window in R should look like this but retain full 
   <img src="https://github.com/user-attachments/assets/77740abb-c046-4377-ab81-7de4a1e64d23" alt="Description of Image" width="500">
 </div>
 
-This was just a brief overview of one way shiny can be used, check out a prevoius coding club tutorial [here](https://ourcodingclub.github.io/tutorials/shiny/) for more detail on shiny, and on how to export apps running on local links (what you have just created!) into published apps that can be embedded into websites.
+This was just a brief overview of one way shiny can be used, check out a previous coding club tutorial [here](https://ourcodingclub.github.io/tutorials/shiny/) for more detail on shiny, and on how to export apps running on local links (what you have just created!) into published apps that can be embedded into websites.
 
 Take a minute to recap, in this tutorial we  have learned:
 
 ##### - how to convert and make interactive plots
 ##### - an introduction to interactive map visualisation
 ##### - how to present multiple plots in an interactive web application
+
+... and all with the help of our penguins !
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/da3e6138-44e7-49f2-b0f8-c1421e0bbe72" alt="Description of image" width="300">
+	Artwork by @allison_horst.
+</p>
 
 <hr>
 <hr>
