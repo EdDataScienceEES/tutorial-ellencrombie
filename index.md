@@ -150,7 +150,7 @@ These distinctions are made within `layout()` when you make plot_ly graphs direc
 
 ---
 #### Check this code after attempting yourself for the best practice !
-#### Example code for Bar Chart and Box Plot:
+#### Example code for Basic Bar Chart and Box Plot:
 Remember, there are different addittions you can make here, so your code might not look exactly the same but still produce a similar (or even better!) plot. These examples just provide a baseline.
 
 ```r
@@ -185,7 +185,7 @@ htmlwidgets::saveWidget(as_widget(bar_chart_interactive), "Figures/penguin_bar_c
 # save plot
 htmlwidgets::saveWidget(as_widget(box_plot_interactive), "Figures/penguin_box_plot.html")
 ```
-
+\
 <details>
   <summary><b>Click to reveal what the graphs could look like</b></summary>
 
@@ -280,9 +280,9 @@ Such maps are useful when visualising data with a spatial element. For example, 
 
 Lets begin exploring maps by creating a map that pinpoints our three islands. Basic maps like these, that just visualise ditribution, are created by specifying `type = 'scatterboxmap'`within `plot_ly`.
 
-Now, because the palmerpenguins dataset only contains island names, rather than co-ordinates, we need to do some editing to the date frame to include these. I have found approximate co ordinates using google maps for this tutorial.
+Now, because the palmerpenguins dataset only contains island names, rather than coordinates, we need to do some editing to the date frame to include these. I have found approximate co ordinates using google maps for this tutorial.
 
-Adding co ordinates to data:
+Adding coordinates to data:
 
 ```r
 # Assign specific coordinates for each island
@@ -301,22 +301,11 @@ penguins_with_coords <- penguins %>%
       TRUE ~ NA_real_  # Assign NA for any islands not listed
     ))
 ```
-Now our data is prepared we can bstart thinking about how to map it. 
+Now our data is prepared we can start thinking about how to map it. 
 
-__Setting up the map__
-```r
-map_plot <- plot_ly(
-  data = penguins_with_coords,  # Use the dataset with latitude and longitude
-  x = ~longitude,              # Set longitude for the x-axis
-  y = ~latitude,               # Set latitude for the y-axis
-  type = 'scattermapbox',      # Specify map type
-  mode = 'markers',            # Represent data points as markers
-  color = ~species,            # Color markers by penguin species
-  hoverinfo = 'text',          # Customize what appears in tooltips
-  text = ~paste("Species:", species, "<br>Island:", island) # Tooltip content
-)
-```
-Before we make any more edits to the map we need to understand what the above code has done:
+__Creating the Map__
+
+It's important to understand what the code we're going to look at is actually doing:
 
 - Data: the `penguins_with_cords` that we have just created provides the location co ordinates for the map and contains other information on the penguins that can be displayed in more complex maps
 - Coordinates: `x = ~longitude` and `y= ~latitude` determine where the markers will sit on the map
@@ -331,7 +320,38 @@ Before we make any more edits to the map we need to understand what the above co
 - Colour: gives each point a different colour based on penguin species
 - Tooltips: changes what's displayed when you hover over points (used in the same way it is for graphs!)
 
-Back to our map, what should it look like? 
+__Map Layout__
+
+Edits made to the layout of our map include:
+
+- Adding an informative title
+- Specifying the map style using `mapbox =` and within this deciding style, where to centre the map view, and what zoom level to have as the starting point (before users can then zoom in and out)
+- We have used the style `carto-positron` in this first map, this offers a light coloured map, with a minimalistic design, but there are different map styles that change what type of map you see your data preseneted on.
+
+__Code in Action__
+```r
+# interactive map 
+(map_plot <- plot_ly(
+  data = penguins_with_coords,  # use the new dataset that has coordinates
+  x = ~longitude,              # set longitude for the x-axis
+  y = ~latitude,               # set latitude for the y-axis
+  type = 'scattermapbox',      # choose map type
+  mode = 'markers',            # represent data points as markers
+  color = ~species,            # colour points based on penguin species
+  hoverinfo = 'text',          # change what appears in tooltips
+  text = ~paste("Species:", species, "<br>Island:", island)
+) %>%
+  layout(
+    title = "Map of Penguin Population Locations", # informative title
+    mapbox = list(
+      style = "carto-positron",  # choose map style
+      center = list(lon = -64, lat = -65), # where map should be centred when first displayed
+      zoom = 5 # how zoomed in it shoud be
+    )
+  ))
+
+```
+The Map produced should look like this!
 
 
 ```r
