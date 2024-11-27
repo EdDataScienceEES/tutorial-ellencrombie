@@ -37,7 +37,7 @@ htmlwidgets::saveWidget(as_widget(penguin_plotly), "Figures/penguin_plotly.html"
 # Activity (gpplot2 -> plotly)----
 #
 # bar Chart
-(bar_chart <- ggplot(data = penguins, aes(x = species, fill = species)) +
+(bar_chart <- ggplot(data = penguin_data, aes(x = species, fill = species)) +
   geom_bar() +
   labs(
     title = "Bar Chart of Penguin Species Count",
@@ -52,7 +52,7 @@ htmlwidgets::saveWidget(as_widget(penguin_plotly), "Figures/penguin_plotly.html"
 htmlwidgets::saveWidget(as_widget(bar_chart_interactive), "Figures/penguin_bar_chart.html")
 
 # Box Plot
-(box_plot <- ggplot(data = penguins, aes(x = species, y = flipper_length_mm)) +
+(box_plot <- ggplot(data = penguin_data, aes(x = species, y = flipper_length_mm)) +
     geom_boxplot() +
     labs(
       title = "Box Plot of Flipper Length Across Penguin Species",
@@ -95,7 +95,9 @@ htmlwidgets::saveWidget(as_widget(penguin_plotly_2), "Figures/penguin_plotly_2.h
 
 ## Section 2:
 # Interactive Maps ----
-# Assign specific coordinates for each island
+
+
+# Assign coordinates for each island
 penguins_with_coords <- penguins %>%
   mutate(
     latitude = case_when( 
@@ -111,6 +113,15 @@ penguins_with_coords <- penguins %>%
       TRUE ~ NA_real_  
     ))
 
+# Calculate population size for each island
+penguin_population <- penguins_with_coords %>% 
+  group_by(island) %>% 
+  summarise(population_size = n())
+
+# Merge population into the data set
+penguins_with_coords <- penguins_with_coords %>% 
+  left_join(penguin_population, by = "island")
+
 # interactive map 
 (map_plot <- plot_ly(
   data = penguins_with_coords,  # use the new dataset that has coordinates
@@ -120,7 +131,9 @@ penguins_with_coords <- penguins %>%
   mode = 'markers',            # represent data points as markers
   color = ~species,            # colour points based on penguin species
   hoverinfo = 'text',          # change what appears in tooltips
-  text = ~paste("Species:", species, "<br>Island:", island)
+  text = ~paste("Species:", species,
+                "<br>Island:", island,
+                "<br>Population Size:", population_size)
 ) %>%
     layout(
       title = "Map of Penguin Population Locations", # informative title
@@ -133,5 +146,33 @@ penguins_with_coords <- penguins %>%
 
 # save the map 
 htmlwidgets::saveWidget(as_widget(map_plot), "Figures/penguin_map.html")
+
+# Scaled Interactive Bubble Map
+(bubble_map <- plot_ly(
+  data = penguins_with_coords,  # dataset that includes population size
+  x = ~longitude,              # longitude for the x-axis
+  y = ~latitude,               # latitude for the y-axis
+  type = 'scattermapbox',      # map type
+  mode = 'markers',            # represent points as markers
+  size = ~population_size,     # scale marker size by population
+  color = ~species, # colour bubbles by species
+  hoverinfo = 'text',          # edit tooltip content
+  text = ~paste(
+    "Species:", species, 
+    "<br>Island:", island, 
+    "<br>Population Size:", population_size
+  )  # tooltip content
+) %>%
+  layout(
+    title = "Penguin Population Bubbl Map", # Map title
+    mapbox = list(
+      style = "open-street-map",          # Map style
+      center = list(lon = -64, lat = -65), # Initial map center
+      zoom = 5                            # Initial zoom level
+    )
+  ))
+
+# save the map 
+htmlwidgets::saveWidget(as_widget(bubble_map), "Figures/bubble_map.html")
 
 
