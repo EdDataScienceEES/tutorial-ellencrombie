@@ -12,7 +12,7 @@ ___
 
 #### <a href="#section2"> 2. Interactive map visualisations </a>
 
-#### <a href="#section3"> 3. Interactive data dashboards: combining `plotly` and `leaflet`</a>
+#### <a href="#section3"> 3. Embedding multiple plots into an interactive web application `</a>
 
 ### Introduction
 ---------------------------
@@ -392,15 +392,16 @@ You will notice that the size of the markers remains relative to eachother even 
 
 <a name="section3"></a>
 
-## 3. Interactive data dashboards
+## 3. Embedding multiple plots into an interactive web application
 
-More text, code and images.
 
-This is the end of the tutorial. Summarise what the student has learned, possibly even with a list of learning outcomes. In this tutorial we learned:
+
+
+In this tutorial we learned:
 
 ##### - how to convert and make interactive plots
-##### - an introduction to intercative map visualisation in plotly
-##### - some of the different plot methods in ggplot2
+##### - an introduction to interactive map visualisation
+##### - how to embedding multiple plots into one interactive web application
 
 <hr>
 <hr>
