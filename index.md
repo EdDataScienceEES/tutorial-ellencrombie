@@ -185,7 +185,7 @@ htmlwidgets::saveWidget(as_widget(bar_chart_interactive), "Figures/penguin_bar_c
 # save plot
 htmlwidgets::saveWidget(as_widget(box_plot_interactive), "Figures/penguin_box_plot.html")
 ```
-\
+
 <details>
   <summary><b>Click to reveal what the graphs could look like</b></summary>
 
@@ -282,10 +282,12 @@ Lets begin exploring maps by creating a map that pinpoints our three islands. Ba
 
 Now, because the palmerpenguins dataset only contains island names, rather than coordinates, we need to do some editing to the date frame to include these. I have found approximate co ordinates using google maps for this tutorial.
 
-Adding coordinates to data:
+I am also adding an colomn to indiacte population size (based on isladn the penguin came from as this will be intergrated into the map as well.
+
+Making dditions to data:
 
 ```r
-# Assign specific coordinates for each island
+# Assign coordinates for each island
 penguins_with_coords <- penguins %>%
   mutate(
     latitude = case_when( 
@@ -300,6 +302,16 @@ penguins_with_coords <- penguins %>%
       island == "Biscoe" ~ -65.972880,  # Using Renaud Island's longitude
       TRUE ~ NA_real_  # Assign NA for any islands not listed
     ))
+
+# Calculate population size for each island
+penguin_population <- penguins_with_coords %>% 
+  group_by(island) %>% 
+  summarise(population_size = n())
+
+# Merge population into the data set
+penguins_with_coords <- penguins_with_coords %>% 
+  left_join(penguin_population, by = "island")
+
 ```
 Now our data is prepared we can start thinking about how to map it. 
 
@@ -339,34 +351,48 @@ __Code in Action__
   mode = 'markers',            # represent data points as markers
   color = ~species,            # colour points based on penguin species
   hoverinfo = 'text',          # change what appears in tooltips
-  text = ~paste("Species:", species, "<br>Island:", island)
+  text = ~paste("Species:", species,
+                "<br>Island:", island,
+                "<br>Population Size:", population_size)
 ) %>%
-  layout(
-    title = "Map of Penguin Population Locations", # informative title
-    mapbox = list(
-      style = "carto-positron",  # choose map style
-      center = list(lon = -64, lat = -65), # where map should be centred when first displayed
-      zoom = 5 # how zoomed in it shoud be
-    )
-  ))
-
+    layout(
+      title = "Map of Penguin Population Locations", # informative title
+      mapbox = list(
+        style = "carto-positron",  # choose map style
+        center = list(lon = -64, lat = -65), # where map should be centred when first displayed
+        zoom = 5 # how zoomed in it shoud be
+      )
+    ))
 ```
-The Map produced should look like this!
+The map produced should look like this!
+
+<div style="text-align: center;">
+    <iframe src="Figures/penguin_map.html" width="800" height="600" style="border:none;"></iframe>
+</div>
+
+As you can see, the interactive map now displays data on the penguins (I have chosen to include species, island, and population) while also placing this data in a geographic context. 
+
+Additionally, the markers on the map can also be used to display data, points can be scaled to respresent values such as averages or population size. In the map above population size is included in the tooltip info, let's see how to use a bubble map to chnage this and instead display population size s represented by the size of location markers.
 
 
 ```r
-add full map code here
-then add bubble map
+# Edits to make scaled Interactive Bubble Map
+# directly into plotly function e.g. following 'mode= 'markers',' add
+size = ~population_size
 
 ```
+This change creates a map like this:
 
-At this point it would be a good idea to include an image of what the plot is meant to look like so students can check they've done it right. Replace `IMAGE_NAME.png` with your own image file:
 
-<center> <img src="{{ site.baseurl }}/IMAGE_NAME.png" alt="Img" style="width: 800px;"/> </center>
+You will notice that the size of the markers remains relative to eachother even as you zoom in and out around the map. This map also shows the difference in styles that can be used as it is `"open-street-map"` as opposed to `"carto-positron"`that was used in the first map. This is better suited to our data as it includeds specific island nameswhen you zoom in on the map.
+
+<div style="text-align: center;">
+    <iframe src="Figures/bubble_map.html" width="800" height="600" style="border:none;"></iframe>
+</div>
 
 <a name="section3"></a>
 
-## 3. Interactive data dashboards: combining `plotly` and `leaflet`
+## 3. Interactive data dashboards
 
 More text, code and images.
 
